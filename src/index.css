@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Sans:wght@200..800&display=swap');
+
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+@theme{
+  --font-poppins: "Stack Sans Text", sans-serif;
+  --font-momo: "Momo Trust Sans", sans-serif;
+}
+
+.btn-primary {
+  @apply text-white border-none;
+  /* background: #A0BB70; */
+  background: #ffe042;
+  color: rgb(29, 29, 29);
+}
+
+
+/* #A0BB70 ----Primary Color */
