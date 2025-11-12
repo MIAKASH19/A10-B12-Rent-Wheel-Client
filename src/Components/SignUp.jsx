@@ -1,0 +1,81 @@
+import React, { useState } from "react";
+import { FaEye } from "react-icons/fa";
+import { Link } from "react-router";
+
+const Register = () => {
+    const [show, setShow] = useState(false)
+
+  return (
+    <div className="w-full min-h-screen px-10 ">
+      <div className=" rounded-2xl w-full h-screen flex gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
+        <div className="bg-[url(https://images.unsplash.com/photo-1618353482480-61ca5a9a7879?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGNhcnxlbnwwfDF8MHx8fDA%3D)] bg-cover bg-bottom flex flex-col items-start justify-between w-1/2 h-full rounded-2xl p-5">
+          <span className="bg-white text-sm rounded-full px-4 py-2">
+            Rent-Wheels
+          </span>
+          <div className="text-white">
+            <p className="text-xs ">You Can Easily</p>
+            <h3 className="text-4xl w-4/5">
+              Get accrss your personal hub for clarity and productivity.
+            </h3>
+          </div>
+        </div>
+        <div className=" w-1/2  h-full flex items-center justify-center rounded-2xl ">
+          <div className="card w-4/5 h-full pt-6 ">
+            {/* <div className="w-fit mb-3">
+              <FaStarOfLife className="text-3xl text-[#ffe042] animate-spin duration-1000" style={{ animationDuration: "7s" }}  />
+            </div> */}
+            <h1 className="text-5xl font-semibold text-start">
+              Create An Account
+            </h1>
+            <p className="text-zinc-500 mt-2 text-sm text-start ">
+              Access your lists, bookings and browse car anytime, anywhere and
+              keep everything flowing in one place
+            </p>
+            <form onSubmit="">
+              <fieldset className="fieldset">
+                <label className="mt-2 text-sm">Name</label>
+                <input
+                  type="text"
+                  className="input w-full rounded-full"
+                  placeholder="Name"
+                />
+                <label className="mt-2 text-sm">Photo Url</label>
+                <input
+                  type="text"
+                  className="input w-full rounded-full"
+                  placeholder="Photo Url"
+                />
+                <label className="mt-2 text-sm">Email</label>
+                <input
+                  type="email"
+                  className="input w-full rounded-full"
+                  placeholder="Email"
+                />
+                <div className="relative gap-2 flex flex-col">
+                  <label className="mt-2 text-sm">Create Password</label>
+                  <input
+                    type={show? "text": "password"}
+                    className="input w-full rounded-full"
+                    placeholder="Password"
+                  />
+                  <span onClick={()=>setShow(!show)} className="absolute top-12 right-5"><FaEye className="text-lg"/></span>
+                </div>
+                <div className="mt-2">
+                  Have An Account? <Link to="/login" className="text-blue-800 hover:underline">LogIn</Link>
+                </div>
+                <button className="btn btn-neutral rounded-full mt-2">
+                  Submit
+                </button>
+                <button className="btn btn-primary rounded-full mt-4">
+                  Log In With Google
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Register;

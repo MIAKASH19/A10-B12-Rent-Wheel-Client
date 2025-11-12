@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="navbar bg-base-100 px-8">
       <div className="navbar-start">
@@ -41,16 +43,49 @@ const Navbar = () => {
         <a className="text-xl">Rent-Wheels</a>
       </div>
       <div className="navbar-center gap-2 ">
-        <Link to={"/"} className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2">Home</Link>
-        <Link to={"/"} className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2">Add Car</Link>
-        <Link to={"/"} className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2">My Listings</Link>
-        <Link to={"/"} className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2">My Bookings</Link>
-        <Link to={"/"} className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2">Browse Cars</Link>
+        <Link
+          to={"/"}
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+        >
+          Home
+        </Link>
+        <Link
+          to={"/add-car"}
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+        >
+          Add Car
+        </Link>
+        <Link
+          to={"/my-listings"}
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+        >
+          My Listings
+        </Link>
+        <Link
+          to={"/my-bookings"}
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+        >
+          My Bookings
+        </Link>
+        <Link
+          to={"/browse-cars"}
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+        >
+          Browse Cars
+        </Link>
       </div>
-      <div className="navbar-end flex gap-4 text-zinc-800 hidden lg:flex">
-        
-        <Link to={"/"} className="btn-primary rounded-full text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2">Register</Link>
-      </div>
+      {/* <div className="navbar-end gap-4 text-zinc-800 hidden lg:flex">
+        {user ? (
+          <div className="bg-red-500 w-10 h-10 rounded-full"></div>
+        ) : (
+          <Link
+            to={"/register"}
+            className="btn-primary rounded-full text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+          >
+            Register
+          </Link>
+        )}
+      </div> */}
     </div>
   );
 };
