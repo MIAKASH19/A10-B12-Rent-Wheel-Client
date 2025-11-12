@@ -1,24 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios";
-
-
+import { PiArrowUpRightBold } from "react-icons/pi";
+import { Link } from "react-router";
 
 const Featured = () => {
+  const [cards, setCards] = useState([]);
+  const axiosInstance = useAxios();
 
-    
-  const axiosInstace = useAxios();
   useEffect(() => {
-    axiosInstace.get("/cars").then((res) => console.log(res.data));
+    axiosInstance.get("/featured-cars").then((res) => {
+      setCards(res.data);
+      console.log(res.data);
+    });
   }, []);
 
-  const car =  {
-image: "/images/car.jpg",
-title: "C-Class - 2023",
-subtitle: "2.0 255‑hp Turbo, Automatic 9‑G Tronic",
-features: ["50 Miles", "Automatic", "2023"],
-price: "$16,000",
-badge: "For Sale",
-}
+  const car = {
+    image: "/images/car.jpg",
+    title: "C-Class - 2023",
+    subtitle: "2.0 255‑hp Turbo, Automatic 9‑G Tronic",
+    features: ["50 Miles", "Automatic", "2023"],
+    price: "$16,000",
+    badge: "For Sale",
+  };
 
   return (
     <div className="w-full min-h-screen px-10 py-20">
@@ -27,84 +30,39 @@ badge: "For Sale",
         <h2 className="text-4xl">Featured Cars</h2>
         <span className="text-4xl"></span>
       </div>
-      <div className="">
-        <article className="max-w-sm mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div className="relative">
-            <img
-              src={car.image}
-              alt={car.title}
-              className="w-full h-48 object-cover"
-            />
-
-            {/* top-right circular price/badge */}
-            <div className="absolute top-3 right-3">
-              <div className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold shadow">
-                {car.badge}
-              </div>
+      <div className="grid grid-cols-3 place-items-center gap-5 mt-10">
+        {cards.map((card) => (
+          <div key={card._id} className="border border-zinc-200 w-90 h-fit rounded-4xl shadow-2xl p-4">
+            <div className="bg-zinc-800 relative w-full h-50 rounded-3xl">
+              <span
+                className={`rounded-full px-3 py-1 bg-green-500 text-xs absolute top-3 capitalize right-3 ${
+                  card.status === "available" ? "bg-white" : "bg-yellow-400"
+                }`}
+              >
+                {card.status}
+              </span>
             </div>
-
-            {/* bottom-left small overlay (optional) */}
-            <div className="absolute bottom-3 left-3">
-              <div className="bg-black/50 text-white text-xs px-2 py-1 rounded-md">
-                New Arrival
+            <div className="mt-3 px-2">
+              <div className="flex items-center justify-between">
+                <h1 className="text-lg uppercase text-zinc-700 font-momo font-semibold">
+                  {card.car_name}
+                </h1>
+                <p className="text-sm opacity-55">{card.car_type}</p>
               </div>
-            </div>
-          </div>
-
-          <div className="p-4">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {car.title}
-                </h3>
-                <p className="text-sm text-gray-500 mt-1">{car.subtitle}</p>
-              </div>
-
-              <div className="text-right">
-                <p className="text-lg font-bold text-indigo-600">{car.price}</p>
-                <p className="text-xs text-gray-400">/estimate</p>
-              </div>
-            </div>
-
-            <div className="mt-3 flex items-center justify-between text-sm text-gray-600">
-              {car.features.map((f, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <svg
-                    className="w-4 h-4 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span>{f}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-4 flex gap-2">
-              <button className="flex-1 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition">
-                Contact
-              </button>
-              <button className="w-12 h-12 rounded-xl border border-gray-200 flex items-center justify-center hover:bg-gray-50">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 text-gray-600"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+              <p className="text-sm text-zinc-700 mb-2">{card.provider.name}</p>
+              <div className="flex items-center justify-between">
+                <p className="text-lg font-semibold">$400</p>
+                <Link
+                  to={`/cars-details/${card._id}`}
+                  className="hover:text-yellow-400 text-sm flex items-center gap-2 py-2 px-8 opacity-75 rounded-full"
                 >
-                  <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.657 3.172 11.83a4 4 0 010-5.656z" />
-                </svg>
-              </button>
+                  View Details
+                  <PiArrowUpRightBold className="text-xl" />
+                </Link>
+              </div>
             </div>
           </div>
-        </article>
+        ))}
       </div>
     </div>
   );
