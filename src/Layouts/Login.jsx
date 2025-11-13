@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaEye, FaStarOfLife } from "react-icons/fa";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
-        const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const {signInUser} = useContext(AuthContext)
+
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    console.log(email, password)
+
+    signInUser(email, password).then((result)=>{
+        console.log(result)
+    })
+  }
+
   return (
     <div className="w-full min-h-screen px-10 ">
       <div className=" rounded-2xl w-full h-screen flex gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
@@ -21,7 +36,10 @@ const Login = () => {
         <div className=" w-1/2  h-full flex items-center justify-center rounded-2xl ">
           <div className="card w-4/5 h-full py-10 ">
             <div className="w-fit mb-3">
-              <FaStarOfLife className="text-3xl text-[#ffe042] animate-spin duration-1000" style={{ animationDuration: "7s" }}  />
+              <FaStarOfLife
+                className="text-3xl text-[#ffe042] animate-spin duration-1000"
+                style={{ animationDuration: "7s" }}
+              />
             </div>
             <h1 className="text-5xl font-semibold text-start">
               Log In Your Account
@@ -30,28 +48,38 @@ const Login = () => {
               Access your lists, bookings and browse car anytime, anywhere and
               keep everything flowing in one place
             </p>
-            <form onSubmit="">
+            <form onSubmit={handleSubmit}>
               <fieldset className="fieldset">
                 <label className="mt-2 text-sm">Email</label>
                 <input
                   type="email"
                   className="input w-full rounded-full"
+                  name="email"
                   placeholder="Email"
                 />
                 <div className="relative gap-2 flex flex-col">
                   <label className="mt-2 text-sm">Create Password</label>
                   <input
-                    type={show? "text": "password"}
+                    type={show ? "text" : "password"}
                     className="input w-full rounded-full"
+                    name="password"
                     placeholder="Password"
                   />
-                  <span onClick={()=>setShow(!show)} className="absolute top-12 right-5"><FaEye className="text-lg"/></span>
+                  <span
+                    onClick={() => setShow(!show)}
+                    className="absolute top-12 right-5"
+                  >
+                    <FaEye className="text-lg" />
+                  </span>
                 </div>
                 <div className="mt-2">
-                  Have An Account? <Link to="/Sign-up" className="text-blue-800 hover:underline">Sign Up</Link>
+                  Have An Account?{" "}
+                  <Link to="/Sign-up" className="text-blue-800 hover:underline">
+                    Sign Up
+                  </Link>
                 </div>
                 <button className="btn btn-neutral rounded-full mt-2">
-                  Submit
+                  Log In
                 </button>
                 <button className="btn btn-primary rounded-full mt-4">
                   Log In With Google
@@ -62,7 +90,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
