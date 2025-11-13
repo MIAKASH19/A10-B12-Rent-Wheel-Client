@@ -58,6 +58,12 @@ const Navbar = () => {
           Home
         </Link>
         <Link
+          to={"/browse-cars"}
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
+        >
+          Browse Cars
+        </Link>
+        <Link
           to={"/add-car"}
           className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
         >
@@ -75,12 +81,7 @@ const Navbar = () => {
         >
           My Bookings
         </Link>
-        <Link
-          to={"/browse-cars"}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
-        >
-          Browse Cars
-        </Link>
+        
       </div>
       <div className="navbar-end gap-4 text-zinc-800 hidden lg:flex">
         {user ? (

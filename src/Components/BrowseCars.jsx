@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios";
-import { PiArrowUpRightBold } from "react-icons/pi";
 import { Link } from "react-router";
+import { PiArrowUpRightBold } from "react-icons/pi";
 
-const Featured = () => {
+const BrowseCars = () => {
   const [cards, setCards] = useState([]);
   const axiosInstance = useAxios();
 
@@ -13,17 +13,24 @@ const Featured = () => {
       console.log(res.data);
     });
   }, []);
-
   return (
-    <div className="w-full min-h-screen px-10 py-20">
-      <div className="h-20 w-full flex items-center justify-between  border-b-2 border-b-zinc-200">
-        <h3 className="text-4xl font-momo opacity-60">02</h3>
-        <h2 className="text-4xl">Featured Cars</h2>
-        <span className="text-4xl"></span>
+    <div>
+      <div className="flex items-center justify-center flex-col my-10">
+        <h1 className="text-7xl font-medium tracking-tight">Drive Your Dreams, Rent Your Ride</h1>
+        <div></div>
+        <p className="text-sm mt-2">
+          Choose from our premium collection of cars and make every journey
+          memorable. Fast booking, reliable service, and comfort at your
+          fingertips.
+        </p>
+        <div className="w-full h-[1px] mt-4 bg-zinc-300"></div>
       </div>
-      <div className="grid grid-cols-3 place-items-center gap-5 mt-10">
+      <div className="grid grid-cols-3 place-items-center gap-5 my-10">
         {cards.map((card) => (
-          <div key={card._id} className="border border-zinc-200 w-90 h-fit rounded-4xl shadow-2xl p-4">
+          <div
+            key={card._id}
+            className="border border-zinc-200 w-90 h-fit rounded-4xl shadow-2xl p-4"
+          >
             <div className="bg-zinc-800 relative w-full h-50 rounded-3xl">
               <span
                 className={`rounded-full px-3 py-1 bg-green-500 text-xs absolute top-3 capitalize right-3 ${
@@ -59,4 +66,4 @@ const Featured = () => {
   );
 };
 
-export default Featured;
+export default BrowseCars;
