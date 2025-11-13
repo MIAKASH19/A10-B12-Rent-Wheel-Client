@@ -5,6 +5,7 @@ import Home from "../Components/Home";
 import SignUp from "../Components/SignUp";
 import Login from "../Layouts/Login";
 import BrowseCars from "../Components/BrowseCars";
+import AddCars from "../Components/AddCars";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/browse-cars",
         Component: BrowseCars,
+      },
+      {
+        path: "/add-car",
+        Component: AddCars,
       },
       {
         path: "/cars-details/:id",

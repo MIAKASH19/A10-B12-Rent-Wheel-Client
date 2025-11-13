@@ -8,14 +8,14 @@ const BrowseCars = () => {
   const axiosInstance = useAxios();
 
   useEffect(() => {
-    axiosInstance.get("/featured-cars").then((res) => {
+    axiosInstance.get("/browse-cars").then((res) => {
       setCards(res.data);
       console.log(res.data);
     });
   }, []);
   return (
     <div>
-      <div className="flex items-center justify-center flex-col my-10">
+      <div className="flex items-center justify-center flex-col my-10 ">
         <h1 className="text-7xl font-medium tracking-tight">Drive Your Dreams, Rent Your Ride</h1>
         <div></div>
         <p className="text-sm mt-2">
@@ -25,7 +25,7 @@ const BrowseCars = () => {
         </p>
         <div className="w-full h-[1px] mt-4 bg-zinc-300"></div>
       </div>
-      <div className="grid grid-cols-3 place-items-center gap-5 my-10">
+      <div className="grid grid-cols-3 place-items-center gap-5 my-10 mb-20">
         {cards.map((card) => (
           <div
             key={card._id}
@@ -49,10 +49,10 @@ const BrowseCars = () => {
               </div>
               <p className="text-sm text-zinc-700 mb-2">{card.provider.name}</p>
               <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold">$400</p>
+                <p className="text-lg font-semibold">{card.rent_price}tk</p>
                 <Link
                   to={`/cars-details/${card._id}`}
-                  className="hover:text-yellow-400 text-sm flex items-center gap-2 py-2 px-8 opacity-75 rounded-full"
+                  className=" hover:text-[#97b95a] border border-zinc-400 text-sm flex items-center gap-2 py-2 px-8 opacity-75 rounded-full"
                 >
                   View Details
                   <PiArrowUpRightBold className="text-xl" />
