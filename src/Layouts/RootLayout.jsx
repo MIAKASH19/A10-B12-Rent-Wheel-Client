@@ -8,7 +8,7 @@ import { Outlet } from 'react-router';
 
 const HomeLayouts = () => {
   return (
-    <div className='font-poppins'>
+    <div className='font-inter'>
         <Navbar></Navbar>
         <Outlet></Outlet>
         <Footer></Footer>

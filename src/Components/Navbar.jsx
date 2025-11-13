@@ -53,31 +53,31 @@ const Navbar = () => {
       <div className="navbar-center gap-2 ">
         <Link
           to={"/"}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
         >
           Home
         </Link>
         <Link
           to={"/add-car"}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
         >
           Add Car
         </Link>
         <Link
           to={"/my-listings"}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
         >
           My Listings
         </Link>
         <Link
           to={"/my-bookings"}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
         >
           My Bookings
         </Link>
         <Link
           to={"/browse-cars"}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
         >
           Browse Cars
         </Link>
@@ -112,7 +112,7 @@ const Navbar = () => {
         ) : (
           <Link
             to={"/sign-up"}
-            className="bg-[#A0BB70] rounded-full text-sm text-white hover:bg-black transiont-all duration-300 px-4 py-2"
+            className="bg-[#A0BB70] rounded-full text-sm text-white hover:bg-black transition-all duration-300 px-4 py-2"
           >
             Sign In
           </Link>
