@@ -1,15 +1,19 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../Context/AuthContext";
 
 const CarsDetails = () => {
+  const [car, setCar] = useState({})
   const {user} = useContext(AuthContext)
   const { id } = useParams();
   const axiosInstance = useAxios();
 
   useEffect(() => {
-    axiosInstance.get(`/cars/${id}`).then((res) => console.log(res.data));
+    axiosInstance.get(`/cars/${id}`).then((res) => (
+      setCar(res.data),
+      console.log(res.data)
+    ));
   }, []);
 
   return (

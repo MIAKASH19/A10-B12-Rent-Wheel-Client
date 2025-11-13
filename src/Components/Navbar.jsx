@@ -3,7 +3,15 @@ import { Link } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    alert("User Signed Out")
+    signOutUser()
+      .then(() => {})
+      .catch();
+  };
+
   return (
     <div className="navbar bg-base-100 px-8">
       <div className="navbar-start">
@@ -74,18 +82,42 @@ const Navbar = () => {
           Browse Cars
         </Link>
       </div>
-      {/* <div className="navbar-end gap-4 text-zinc-800 hidden lg:flex">
+      <div className="navbar-end gap-4 text-zinc-800 hidden lg:flex">
         {user ? (
-          <div className="bg-red-500 w-10 h-10 rounded-full"></div>
+          //
+          <div className="dropdown dropdown-bottom dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className=" w-10 h-10 rounded-full overflow-hidden"
+            >
+              <img src={user.photoURL} className="w-full h-full object-cover" />
+            </div>
+            <div
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100 rounded-3xl z-1 w-52 p-4 shadow-sm"
+            >
+              <h1 className="opacity-80 mb-2 ">{user.displayName}</h1>
+              <p className="border-b border-zinc-200 pb-2 text-xs">
+                {user.email}
+              </p>
+              <button
+                onClick={handleSignOut}
+                className="bg-[#A0BB70] text-white transition-all duration-300 hover:bg-black py-2 rounded-3xl mt-3"
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
         ) : (
           <Link
-            to={"/register"}
-            className="btn-primary rounded-full text-sm hover:bg-zinc-200 transiont-all duration-300 px-4 py-2"
+            to={"/sign-up"}
+            className="bg-[#A0BB70] rounded-full text-sm text-white hover:bg-black transiont-all duration-300 px-4 py-2"
           >
-            Register
+            Sign In
           </Link>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };

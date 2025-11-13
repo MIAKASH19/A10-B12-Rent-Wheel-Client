@@ -1,23 +1,37 @@
 import React, { useContext, useState } from "react";
 import { FaEye, FaStarOfLife } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
+  const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
-  const {signInUser} = useContext(AuthContext)
+  const { signInUser, setUser, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  const handleSubmit=(e)=>{
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    console.log(email, password);
+    signInUser(email, password)
+      .then((result) => {
+        e.target.reset();
+        setUser(result.user);
+        navigate(`${location.state ? location.state : "/"}`);
+        console.log(user);
+      })
+      .catch((error) => setError(error));
+  };
 
-    console.log(email, password)
-
-    signInUser(email, password).then((result)=>{
-        console.log(result)
-    })
-  }
+  const handleGoogleLogin = () => {
+    signInWithGoogle()
+      .then(() => {
+        navigate(location?.state || "/");
+      })
+      .catch((error) => setError(error.message));
+  };
 
   return (
     <div className="w-full min-h-screen px-10 ">
@@ -78,10 +92,17 @@ const Login = () => {
                     Sign Up
                   </Link>
                 </div>
-                <button className="btn btn-neutral rounded-full mt-2">
+                <button
+                  type="submit"
+                  className="btn btn-neutral rounded-full mt-2"
+                >
                   Log In
                 </button>
-                <button className="btn btn-primary rounded-full mt-4">
+                <button
+                  type="button"
+                  onClick={handleGoogleLogin}
+                  className="btn btn-primary rounded-full mt-4"
+                >
                   Log In With Google
                 </button>
               </fieldset>

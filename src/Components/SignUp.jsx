@@ -13,20 +13,20 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    const photoUrl = e.target.photoUrl.value;
+    const photo = e.target.photoUrl.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
     console.log(name, photoUrl, email, password);
 
-    const passRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+    // const passRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
 
-    if (!passRegex.test(password)) {
-      setError(
-        "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters."
-      );
-      return;
-    }
+    // if (!passRegex.test(password)) {
+    //   setError(
+    //     "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters."
+    //   );
+    //   return;
+    // }
 
     createUser(email, password)
       .then((result) => {
@@ -49,7 +49,8 @@ const Register = () => {
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then(() => {
+      .then((result) => {
+        setUser(result.user)
         navigate("/");
       })
       .catch((error) => setError(error.message));

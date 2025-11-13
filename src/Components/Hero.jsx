@@ -13,7 +13,7 @@ const Hero = () => {
             Find the perfect car for every journey - affordable rates, easy
             booking, and reliable service wherever you go.
           </p>
-          <button className="bg-[#ffe042] px-6 py-3 rounded-full text-black transition-all duration-300 hover:bg-black hover:text-white">Browse Cars</button>
+          <button className="bg-[#A0BB70] px-6 py-3 rounded-full text-white transition-all duration-300 hover:bg-black">Browse Cars</button>
         </div>
       </div>
     </div>
