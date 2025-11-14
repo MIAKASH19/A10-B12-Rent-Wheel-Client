@@ -4,7 +4,6 @@ import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
-  console.log(user)
 
   const handleSignOut = () => {
     alert("User Signed Out")

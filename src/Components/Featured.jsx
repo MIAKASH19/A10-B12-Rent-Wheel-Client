@@ -10,7 +10,6 @@ const Featured = () => {
   useEffect(() => {
     axiosInstance.get("/featured-cars").then((res) => {
       setCards(res.data);
-      console.log(res.data);
     });
   }, []);
 

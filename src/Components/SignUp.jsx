@@ -17,24 +17,38 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(name, photoUrl, email, password);
+    console.log(name, photo, email, password);
 
-    // const passRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+    const passRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
 
-    // if (!passRegex.test(password)) {
-    //   setError(
-    //     "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters."
-    //   );
-    //   return;
-    // }
+    if (!passRegex.test(password)) {
+      setError(
+        "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters."
+      );
+      return;
+    }
 
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         updateUser({ displayName: name, photoURL: photo })
           .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photo });
-            navigate("/");
+            const updatedUser = {
+              name: name,
+              email: email,
+              image: photo,
+            };
+            fetch("http://localhost:3000/users", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(updatedUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log("User saved to DB:", data);
+                setUser({ ...user, displayName: name, photoURL: photo });
+                navigate("/");
+              });
           })
           .catch((error) => {
             setError(error);
@@ -50,8 +64,27 @@ const Register = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
-        setUser(result.user)
-        navigate("/");
+        const user = result.user;
+        setUser(user);
+
+        const newUser = {
+          name: user.displayName,
+          email: user.email,
+          image: user.photoURL,
+        };
+
+        fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("after post", data);
+            navigate("/");
+          });
       })
       .catch((error) => setError(error.message));
   };
