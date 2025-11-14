@@ -3,15 +3,16 @@ import { useParams } from "react-router";
 import useAxios from "../hooks/useAxios";
 import { IoLocationOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Context/AuthContext";
 
 const CarsDetails = () => {
+  const {user} = useContext(AuthContext)
   const [car, setCar] = useState({});
   const { id } = useParams();
   const axiosInstance = useAxios();
 
   const {
     car_name,
-    car_type,
     rent_price,
     location,
     status,
@@ -22,10 +23,30 @@ const CarsDetails = () => {
   } = car;
 
   useEffect(() => {
-    axiosInstance
-      .get(`/cars/${id}`)
-      .then((res) => (setCar(res.data), console.log(res.data)));
+    axiosInstance.get(`/cars/${id}`).then((res) => setCar(res.data));
   }, []);
+
+  const AddBooking = (car) => {
+    const newBookings = {
+      name: car.car_name,
+      rent: car.rent_price,
+      status: car.status,
+      provider_email: car?.provider?.email,
+      user_email: user.email,
+      location: car.location,
+      car_id: id,
+      image : car.image,
+    };
+    fetch("http://localhost:3000/bookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newBookings),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
 
   const handleBookNow = () => {
     Swal.fire({
@@ -47,6 +68,7 @@ const CarsDetails = () => {
                 ...prev,
                 status: "unavailable",
               }));
+              AddBooking(car);
               Swal.fire({
                 title: "Booked!",
                 text: "You Booked this Car",
@@ -99,8 +121,13 @@ const CarsDetails = () => {
 
   return (
     <div className="w-full min-h-screen flex gap-5 px-10 mt-10 ">
-      <div className="w-3/5 relative bg-zinc-100 h-120 rounded-2xl">
-        <span className={`px-3 py-1 absolute rounded-full ${status?.toLowerCase() === "available"? "bg-white": "bg-yellow-400"} top-4 right-4 capitalize`}>
+      <div className="w-3/5 relative bg-zinc-100 h-120 rounded-2xl overflow-hidden">
+        <img src={image} className="w-full h-full object-cover" />
+        <span
+          className={`px-3 py-1 absolute rounded-full ${
+            status?.toLowerCase() === "available" ? "bg-white" : "bg-yellow-400"
+          } top-4 right-4 capitalize`}
+        >
           {status}
         </span>
       </div>

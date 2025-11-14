@@ -48,7 +48,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="text-xl">Rent-Wheels</a>
+        <Link to="/" className="text-xl">Rent-Wheels</Link>
       </div>
       <div className="navbar-center gap-2 ">
         <Link
@@ -70,7 +70,7 @@ const Navbar = () => {
           Add Car
         </Link>
         <Link
-          to={"/my-listings"}
+          to={`/my-listings?email=${user?.email}`}
           className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
         >
           My Listings

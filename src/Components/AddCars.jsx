@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const AddCars = () => {
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -37,6 +38,7 @@ const AddCars = () => {
         console.log("server responsed", data);
         if (data.insertedId) {
           alert("Car Added Successfully!");
+          navigate("/")
           form.reset();
         } else {
           alert("Something went wrong!");

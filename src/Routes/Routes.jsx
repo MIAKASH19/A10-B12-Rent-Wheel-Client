@@ -7,6 +7,8 @@ import Login from "../Layouts/Login";
 import BrowseCars from "../Components/BrowseCars";
 import AddCars from "../Components/AddCars";
 import MyBookings from "../Components/MyBookings";
+import PrivateRoute from "./PrivateRoute";
+import MyListings from "../Components/MyListings";
 
 export const router = createBrowserRouter([
   {
@@ -31,15 +33,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/add-car",
-        Component: AddCars,
+        element: <PrivateRoute><AddCars></AddCars></PrivateRoute>,
+      },
+      {
+        path: "/my-listings",
+        element: <PrivateRoute><MyListings></MyListings></PrivateRoute>,
       },
       {
         path: "/my-bookings",
-        Component: MyBookings,
+        element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>,
       },
       {
         path: "/cars-details/:id",
-        Component: CarsDetails,
+        element: <PrivateRoute><CarsDetails></CarsDetails></PrivateRoute>,
       },
       {
         path: "cars-details/:id",
