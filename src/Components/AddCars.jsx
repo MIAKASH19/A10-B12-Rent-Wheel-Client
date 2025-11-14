@@ -2,109 +2,151 @@ import React from "react";
 import { Link } from "react-router";
 
 const AddCars = () => {
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const form = e.target;
+
+    const carData = {
+      car_name: form.car_name.value,
+      car_type: form.category.value,
+      category: form.category.value,
+      image: form.photo_url.value,
+      provider: {
+        name: form.name.value,
+        email: form.provider_email.value,
+      },
+      status: "Available",
+      rent_price: form.rent_price.value,
+      location: form.location.value,
+      description: form.description.value,
+      added_time: new Date().toLocaleString("sv-SE").replace("T", " "),
+    };
+
+    console.log(carData);
+
+    fetch("http://localhost:3000/add-car", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(carData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("server responsed", data);
+        if (data.insertedId) {
+          alert("Car Added Successfully!");
+          form.reset();
+        } else {
+          alert("Something went wrong!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Failed to add car. Please try again.");
+      });
   };
+
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-zinc-100">
-        <form onSubmit={handleSubmit} className="flex items-center gap-4 w-2/5 px-5 py-10 rounded-3xl bg-green-500">
-          <fieldset className="fieldset">
-            <label className="mt-2 text-sm">Name</label>
+    <div className="w-full min-h-screen flex items-center justify-center bg-zinc-100 py-10">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center gap-4 w-150 px-5 py-10 rounded-3xl shadow-2xl bg-white border border-zinc-200"
+      >
+        <h1 className="text-5xl font-medium">Add all fields</h1>
+        <div className="flex items-center gap-5 w-full justify-between">
+          <div className="flex flex-col gap-2 w-1/2">
+            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+              Car Name
+            </label>
+            <input
+              type="text"
+              className="input w-full rounded-full"
+              name="car_name"
+              placeholder="Car name"
+            />
+          </div>
+          <div className="flex flex-col gap-2 w-1/2">
+            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+              Category
+            </label>
+            <input
+              type="text"
+              className="input w-full rounded-full"
+              name="category"
+              placeholder="category"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-2 w-full">
+          <label className="mt-2 font-semibold text-zinc-700 text-sm">
+            Photo URL
+          </label>
+          <input
+            type="text"
+            className="input w-full rounded-full"
+            name="photo_url"
+            placeholder="Paste URL"
+          />
+        </div>
+
+        <div className="flex items-center gap-5 w-full justify-between">
+          <div className="flex flex-col w-1/2">
+            <label className="mt-2 text-sm">Provider Name</label>
             <input
               type="text"
               className="input w-full rounded-full"
               name="name"
               placeholder="Name"
             />
-            <label className="mt-2 text-sm">Photo Url</label>
-            <input
-              type="text"
-              className="input w-full rounded-full"
-              name="photoUrl"
-              placeholder="Photo Url"
-            />
-            <label className="mt-2 text-sm">Email</label>
+          </div>
+          <div className="flex flex-col w-1/2">
+            <label className="mt-2 text-sm">Provider Email</label>
             <input
               type="email"
               className="input w-full rounded-full"
-              name="email"
-              placeholder="Email"
+              name="provider_email"
+              placeholder="Provider Email"
             />
-            <div className="relative gap-2 flex flex-col">
-              <label className="mt-2 text-sm">Create Password</label>
-              <input
-                //   type={show ? "text" : "password"}
-                className="input w-full rounded-full"
-                name="password"
-                placeholder="Password"
-              />
-              <span
-                //   onClick={() => setShow(!show)}
-                className="absolute top-12 right-5"
-              >
-                {/* <FaEye className="text-lg" /> */}
-              </span>
-            </div>
-            <div className="mt-2">
-              Have An Account?{" "}
-              <Link to="/login" className="text-blue-800 hover:underline">
-                LogIn
-              </Link>
-            </div>
-            <button type="submit" className="btn btn-neutral rounded-full mt-2">
-              Submit
-            </button>
-            {/* {error && <p className="text-red-500 text-xs">{error}</p>} */}
-          </fieldset>
-          <fieldset className="fieldset">
-            <label className="mt-2 text-sm">Name</label>
+          </div>
+        </div>
+        <div className="flex items-center gap-5 w-full justify-between">
+          <div className="flex flex-col gap-2 w-1/2">
+            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+              Rent Price
+            </label>
+            <input
+              type="number"
+              className="input w-full rounded-full"
+              name="rent_price"
+              placeholder="Rent Price"
+            />
+          </div>
+          <div className="flex flex-col gap-2 w-1/2">
+            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+              Location
+            </label>
             <input
               type="text"
               className="input w-full rounded-full"
-              name="name"
-              placeholder="Name"
+              name="location"
+              placeholder="location"
             />
-            <label className="mt-2 text-sm">Photo Url</label>
-            <input
-              type="text"
-              className="input w-full rounded-full"
-              name="photoUrl"
-              placeholder="Photo Url"
-            />
-            <label className="mt-2 text-sm">Email</label>
-            <input
-              type="email"
-              className="input w-full rounded-full"
-              name="email"
-              placeholder="Email"
-            />
-            <div className="relative gap-2 flex flex-col">
-              <label className="mt-2 text-sm">Create Password</label>
-              <input
-                //   type={show ? "text" : "password"}
-                className="input w-full rounded-full"
-                name="password"
-                placeholder="Password"
-              />
-              <span
-                //   onClick={() => setShow(!show)}
-                className="absolute top-12 right-5"
-              >
-                {/* <FaEye className="text-lg" /> */}
-              </span>
-            </div>
-            <div className="mt-2">
-              Have An Account?{" "}
-              <Link to="/login" className="text-blue-800 hover:underline">
-                LogIn
-              </Link>
-            </div>
-            <button type="submit" className="btn btn-neutral rounded-full mt-2">
-              Submit
-            </button>
-            {/* {error && <p className="text-red-500 text-xs">{error}</p>} */}
-          </fieldset>
-        </form>
+          </div>
+        </div>
+        <textarea
+          name="description"
+          className="border w-full rounded-2xl border-zinc-300 p-3"
+          id=""
+          placeholder="Write description..."
+          cols="40"
+          rows="5"
+        ></textarea>
+        <button className="bg-black text-white w-full transition-all duration-300  py-2 rounded-3xl mt-3 cursor-pointer">
+          Add
+        </button>
+      </form>
     </div>
   );
 };
