@@ -6,6 +6,7 @@ import SignUp from "../Components/SignUp";
 import Login from "../Layouts/Login";
 import BrowseCars from "../Components/BrowseCars";
 import AddCars from "../Components/AddCars";
+import MyBookings from "../Components/MyBookings";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "/add-car",
         Component: AddCars,
+      },
+      {
+        path: "/my-bookings",
+        Component: MyBookings,
       },
       {
         path: "/cars-details/:id",

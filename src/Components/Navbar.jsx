@@ -4,6 +4,7 @@ import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  console.log(user)
 
   const handleSignOut = () => {
     alert("User Signed Out")
@@ -76,7 +77,7 @@ const Navbar = () => {
           My Listings
         </Link>
         <Link
-          to={"/my-bookings"}
+          to={`/my-bookings?email=${user?.email}`}
           className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
         >
           My Bookings

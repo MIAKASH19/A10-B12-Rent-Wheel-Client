@@ -10,7 +10,6 @@ const BrowseCars = () => {
   useEffect(() => {
     axiosInstance.get("/browse-cars").then((res) => {
       setCards(res.data);
-      console.log(res.data);
     });
   }, []);
   return (
@@ -23,7 +22,7 @@ const BrowseCars = () => {
           memorable. Fast booking, reliable service, and comfort at your
           fingertips.
         </p>
-        <div className="w-full h-[1px] mt-4 bg-zinc-300"></div>
+        <div className="w-full h-px mt-4 bg-zinc-300"></div>
       </div>
       <div className="grid grid-cols-3 place-items-center gap-5 my-10 mb-20">
         {cards.map((card) => (
@@ -33,8 +32,8 @@ const BrowseCars = () => {
           >
             <div className="bg-zinc-800 relative w-full h-50 rounded-3xl">
               <span
-                className={`rounded-full px-3 py-1 bg-green-500 text-xs absolute top-3 capitalize right-3 ${
-                  card.status === "available" ? "bg-white" : "bg-yellow-400"
+                className={`rounded-full px-3 py-1 text-xs absolute top-3 capitalize right-3 ${
+                  card?.status?.toLowerCase() === "available" ? "bg-white" : "bg-yellow-400"
                 }`}
               >
                 {card.status}
@@ -47,7 +46,7 @@ const BrowseCars = () => {
                 </h1>
                 <p className="text-sm opacity-55">{card.car_type}</p>
               </div>
-              <p className="text-sm text-zinc-700 mb-2">{card.provider.name}</p>
+              <p className="text-sm text-zinc-700 mb-2">{card.provider?.name}</p>
               <div className="flex items-center justify-between">
                 <p className="text-lg font-semibold">{card.rent_price}tk</p>
                 <Link
