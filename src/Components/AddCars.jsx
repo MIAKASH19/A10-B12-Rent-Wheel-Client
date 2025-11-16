@@ -1,8 +1,10 @@
 import React from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const AddCars = () => {
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,30 +26,43 @@ const AddCars = () => {
       added_time: new Date().toLocaleString("sv-SE").replace("T", " "),
     };
 
-    console.log(carData);
-
-    fetch("http://localhost:3000/add-car", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(carData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("server responsed", data);
-        if (data.insertedId) {
-          alert("Car Added Successfully!");
-          navigate("/");
-          form.reset();
-        } else {
-          alert("Something went wrong!");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Failed to add car. Please try again.");
+    try {
+      const res = await fetch("http://localhost:3000/add-car", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(carData),
       });
+
+      const data = await res.json();
+      console.log("server response", data);
+
+      if (data.insertedId) {
+        Swal.fire({
+          icon: "success",
+          title: "Car Added!",
+          text: "গাড়ি সফলভাবে যোগ করা হয়েছে।",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        form.reset();
+        navigate("/");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops!",
+          text: "কিছু ভুল হয়েছে। আবার চেষ্টা করুন।",
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: "গাড়ি যোগ করা যায়নি। আবার চেষ্টা করুন।",
+      });
+    }
   };
 
   return (
@@ -166,7 +181,6 @@ const AddCars = () => {
         <textarea
           name="description"
           className="border w-full rounded-2xl border-zinc-300 p-3"
-          id=""
           placeholder="Write description..."
           cols="40"
           rows="5"

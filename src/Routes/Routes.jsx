@@ -9,6 +9,7 @@ import AddCars from "../Components/AddCars";
 import MyBookings from "../Components/MyBookings";
 import PrivateRoute from "./PrivateRoute";
 import MyListings from "../Components/MyListings";
+import ErrorPage from "../Components/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,26 +34,40 @@ export const router = createBrowserRouter([
       },
       {
         path: "/add-car",
-        element: <PrivateRoute><AddCars></AddCars></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <AddCars></AddCars>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-listings",
-        element: <PrivateRoute><MyListings></MyListings></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyListings></MyListings>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-bookings",
-        element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyBookings></MyBookings>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/cars-details/:id",
-        element: <PrivateRoute><CarsDetails></CarsDetails></PrivateRoute>,
-      },
-      {
-        path: "cars-details/:id",
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/cars/${params.id}`),
-        Component: CarsDetails,
+        element: (
+          <PrivateRoute>
+            <CarsDetails></CarsDetails>
+          </PrivateRoute>
+        ),
       },
     ],
+  },
+  {
+    path: "*",
+    Component: ErrorPage,
   },
 ]);

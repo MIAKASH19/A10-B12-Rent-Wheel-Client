@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useAxios from "../hooks/useAxios";
 import { IoLocationOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthContext";
+import { FaArrowLeft } from "react-icons/fa6";
 
 const CarsDetails = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
   const [car, setCar] = useState({});
   const { id } = useParams();
   const axiosInstance = useAxios();
@@ -107,9 +109,9 @@ const CarsDetails = () => {
           const bookingRes = await axiosInstance.get(
             `/bookings?email=${user.email}`
           );
-          console.log(bookingRes)
+          console.log(bookingRes);
           const userBooking = bookingRes.data.find((b) => b.car_id === id);
-          console.log(userBooking)
+          console.log(userBooking);
 
           if (!userBooking) {
             return Swal.fire(
@@ -121,13 +123,11 @@ const CarsDetails = () => {
 
           const bookingId = userBooking._id;
 
-          // 2️⃣ Update car status → available
           const carCancelRes = await axiosInstance.patch(`/cars/cancel/${id}`);
 
           if (carCancelRes.data.modifiedCount > 0) {
             setCar((prev) => ({ ...prev, status: "available" }));
 
-            // 3️⃣ Delete booking from database
             await axiosInstance.delete(`/bookings/${bookingId}`);
 
             Swal.fire(
@@ -145,60 +145,69 @@ const CarsDetails = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex gap-5 px-10 mt-10 ">
-      <div className="w-3/5 relative bg-zinc-100 h-120 rounded-2xl overflow-hidden">
-        <img src={image} className="w-full h-full object-cover" />
-        <span
-          className={`px-3 py-1 absolute rounded-full ${
-            status?.toLowerCase() === "available" ? "bg-white" : "bg-yellow-400"
-          } top-4 right-4 capitalize`}
-        >
-          {status?.toLowerCase() === "available"? "Available" : "Booked"}
-        </span>
+    <div className="w-full min-h-screen flex flex-col items-start gap-5 px-10 mt-10 ">
+      <div className="flex items-center gap-1 border-b border-zinc-100 w-full pb-3">
+        <button onClick={()=>navigate(-1)} className="hover:bg-zinc-100 flex items-center gap-3 transition-all duration-300 px-4 py-2 rounded-full">
+          <FaArrowLeft />Back
+        </button>
       </div>
-      <div className=" h-120 w-2/5 rounded-2xl pl-2">
-        <p className="px-4 py-1 w-fit rounded-full border border-zinc-400 font-medium text-xs mb-2">
-          {category}
-        </p>
-        <div className="flex justify-start gap-4 items-center">
-          <h1 className="font-medium text-2xl">{car_name}</h1>
-          <p className="flex gap-2 text-sm opacity-50">
-            <IoLocationOutline className="text-xl" />
-            {location}
+      <div className="flex items-center justify-between gap-5">
+        <div className="w-3/5 relative bg-zinc-100 h-120 rounded-2xl overflow-hidden">
+          <img src={image} className="w-full h-full object-cover" />
+          <span
+            className={`px-3 py-1 absolute rounded-full ${
+              status?.toLowerCase() === "available"
+                ? "bg-white"
+                : "bg-yellow-400"
+            } top-4 right-4 capitalize`}
+          >
+            {status?.toLowerCase() === "available" ? "Available" : "Booked"}
+          </span>
+        </div>
+        <div className=" h-120 w-2/5 rounded-2xl pl-2">
+          <p className="px-4 py-1 w-fit rounded-full border border-zinc-400 font-medium text-xs mb-2">
+            {category}
           </p>
-        </div>
-        <p className="font-bold text-3xl my-2">
-          {rent_price}tk{" "}
-          <span className="text-lg text-zinc-600 font-normal">/ per day</span>
-        </p>
-        <div className="my-3">
-          <p className="font-medium text-sm">Provider Name :</p>
-          <p className="opacity-70 text-sm">{provider?.name}</p>
-        </div>
-        <div className="my-3">
-          <p className="font-medium text-sm">Provider Email :</p>
-          <p className="opacity-70 text-sm">{provider?.email}</p>
-        </div>
-        <div>
-          <h5 className="font-semibold text-sm">Description :</h5>
-          <p className="text-sm opacity-70">{description}</p>
-        </div>
-        <div className="flex gap-2 my-4">
-          {status?.toLowerCase() === "available" ? (
-            <button
-              onClick={handleBookNow}
-              className="bg-black rounded-full text-sm text-white py-2 w-full"
-            >
-              Book Now
-            </button>
-          ) : (
-            <button
-              onClick={() => handleCancleBook(id)}
-              className="bg-red-500 rounded-full text-sm text-white py-2 w-full"
-            >
-              Cancle Booking
-            </button>
-          )}
+          <div className="flex justify-start gap-4 items-center">
+            <h1 className="font-medium text-2xl">{car_name}</h1>
+            <p className="flex gap-2 text-sm opacity-50">
+              <IoLocationOutline className="text-xl" />
+              {location}
+            </p>
+          </div>
+          <p className="font-bold text-3xl my-2">
+            {rent_price}tk{" "}
+            <span className="text-lg text-zinc-600 font-normal">/ per day</span>
+          </p>
+          <div className="my-3">
+            <p className="font-medium text-sm">Provider Name :</p>
+            <p className="opacity-70 text-sm">{provider?.name}</p>
+          </div>
+          <div className="my-3">
+            <p className="font-medium text-sm">Provider Email :</p>
+            <p className="opacity-70 text-sm">{provider?.email}</p>
+          </div>
+          <div>
+            <h5 className="font-semibold text-sm">Description :</h5>
+            <p className="text-sm opacity-70">{description}</p>
+          </div>
+          <div className="flex gap-2 my-4">
+            {status?.toLowerCase() === "available" ? (
+              <button
+                onClick={handleBookNow}
+                className="bg-black rounded-full text-sm text-white py-2 w-full"
+              >
+                Book Now
+              </button>
+            ) : (
+              <button
+                onClick={() => handleCancleBook(id)}
+                className="bg-red-500 rounded-full text-sm text-white py-2 w-full"
+              >
+                Cancle Booking
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

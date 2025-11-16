@@ -1,5 +1,6 @@
 import React from "react";
 import { PiArrowUpRightBold } from "react-icons/pi";
+import { Link } from "react-router";
 
 const Services = () => {
   return (
@@ -42,7 +43,7 @@ const Services = () => {
           our chauffeur-driven vehicles guarantee a stylish, comfortable, and
           punctual arrival every time.
         </p>
-        <button className="bg-[#ffe042] px-6 py-3 rounded-full text-black transition-all duration-300 hover:bg-black hover:text-white">Browse Cars</button>
+        <Link to="/browse-cars" className="bg-[#ffe042] px-6 py-3 rounded-full text-black transition-all duration-300 hover:bg-black hover:text-white">Browse Cars</Link>
       </div>
     </div>
   );
