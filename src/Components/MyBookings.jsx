@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../Context/AuthContext";
+import Swal from "sweetalert2";
 
 const MyBookings = () => {
   const [bookingCar, setBookingCar] = useState([]);
@@ -21,29 +22,23 @@ const MyBookings = () => {
     updateModalRef.current.showModal();
   };
 
-  const handleUpdateModalButton = () => {
-    updateModalRef.current.close();
-    setSelectedBooking(null);
-  };
-
-  const handleCancleModalButton = () => {
+  const handleCancelModalButton = () => {
     updateModalRef.current.close();
   };
 
-  const handleBookingDelete = async(id) => {
+  const handleBookingDelete = async (id) => {
     const deleteRes = await axiosInstance.delete(`/bookings/${id}`);
 
     if (deleteRes.data.deletedCount > 0) {
       setBookingCar(bookingCar.filter((b) => b._id !== id));
     }
-    
+
     const deletedBooking = bookingCar.find((b) => b._id === id);
     const carId = deletedBooking?.car_id;
 
     if (carId) {
       await axiosInstance.patch(`/cars/cancel/${carId}`);
     }
-
   };
 
   const handleUpdateFormSubmit = (e) => {
@@ -55,8 +50,6 @@ const MyBookings = () => {
       category: form.category.value,
       image: form.photo_url.value,
       status: form.status.value,
-      provider_name: form.provider_name.value,
-      provider_email: form.provider_email.value,
       rent_price: form.rent_price.value,
       location: form.location.value,
       description: form.description.value,
@@ -69,6 +62,23 @@ const MyBookings = () => {
           axiosInstance
             .get(`/bookings?email=${user.email}`)
             .then((res) => setBookingCar(res.data));
+
+          updateModalRef.current.close();
+          setSelectedBooking(null);
+
+          Swal.fire({
+            icon: "success",
+            title: "Updated!",
+            text: "Your booking has been updated successfully.",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong. Try again!",
+          });
         }
       });
   };
@@ -142,7 +152,7 @@ const MyBookings = () => {
                     className="input w-full rounded-full"
                     name="car_name"
                     placeholder="Car name"
-                    defaultValue={selectedBooking?.name}
+                    defaultValue={selectedBooking?.car_name}
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-1/2">
@@ -204,7 +214,7 @@ const MyBookings = () => {
                   <input
                     type="text"
                     className="input w-full rounded-full"
-                    name="name"
+                    name="provider_name"
                     placeholder="Name"
                     disabled
                     defaultValue={selectedBooking?.provider_name}
@@ -232,7 +242,7 @@ const MyBookings = () => {
                     className="input w-full rounded-full"
                     name="rent_price"
                     placeholder="Rent Price"
-                    defaultValue={selectedBooking?.rent}
+                    defaultValue={selectedBooking?.rent_price}
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-1/2">
@@ -259,16 +269,16 @@ const MyBookings = () => {
               ></textarea>
               <div className="flex items-center gap-3">
                 <button
-                  onClick={handleUpdateModalButton}
+                  type="submit"
                   className="bg-black text-white w-full transition-all duration-300  py-2 rounded-3xl mt-3 cursor-pointer"
                 >
                   Update
                 </button>
                 <button
-                  onClick={handleCancleModalButton}
+                  onClick={handleCancelModalButton}
                   className="bg-red-600 text-white w-full transition-all duration-300  py-2 rounded-3xl mt-3 cursor-pointer"
                 >
-                  Cancle
+                  Cancel
                 </button>
               </div>
             </form>

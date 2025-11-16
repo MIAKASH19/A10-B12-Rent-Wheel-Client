@@ -153,7 +153,7 @@ const CarsDetails = () => {
             status?.toLowerCase() === "available" ? "bg-white" : "bg-yellow-400"
           } top-4 right-4 capitalize`}
         >
-          {status.toLowerCase() === "available"? "Available" : "Booked"}
+          {status?.toLowerCase() === "available"? "Available" : "Booked"}
         </span>
       </div>
       <div className=" h-120 w-2/5 rounded-2xl pl-2">
