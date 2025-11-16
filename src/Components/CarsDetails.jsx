@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthContext";
 
 const CarsDetails = () => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const [car, setCar] = useState({});
   const { id } = useParams();
   const axiosInstance = useAxios();
@@ -28,15 +28,19 @@ const CarsDetails = () => {
 
   const AddBooking = (car) => {
     const newBookings = {
-      name: car.car_name,
-      rent: car.rent_price,
-      status: car.status,
+      car_name: car.car_name,
+      category: car.category,
+      image: car.image,
+      provider_name: car?.provider?.name,
       provider_email: car?.provider?.email,
       user_email: user.email,
+      rent_price: car.rent_price,
       location: car.location,
+      status: car.status,
+      description: car.description || "",
       car_id: id,
-      image : car.image,
     };
+
     fetch("http://localhost:3000/bookings", {
       method: "POST",
       headers: {
@@ -87,7 +91,7 @@ const CarsDetails = () => {
     });
   };
 
-  const handleCancleBook = () => {
+  const handleCancleBook = async (id) => {
     Swal.fire({
       title: "Cancel Booking?",
       text: "This car will become available again!",
@@ -96,25 +100,46 @@ const CarsDetails = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Cancel Booking!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        axiosInstance
-          .patch(`/cars/cancel/${id}`)
-          .then((res) => {
-            if (res.data.modifiedCount > 0) {
-              setCar((prev) => ({
-                ...prev,
-                status: "available",
-              }));
+        try {
+          // 1️⃣ Get all bookings for this user
+          const bookingRes = await axiosInstance.get(
+            `/bookings?email=${user.email}`
+          );
+          console.log(bookingRes)
+          const userBooking = bookingRes.data.find((b) => b.car_id === id);
+          console.log(userBooking)
 
-              Swal.fire(
-                "Cancelled!",
-                "The booking has been cancelled.",
-                "success"
-              );
-            }
-          })
-          .catch((error) => console.log(error));
+          if (!userBooking) {
+            return Swal.fire(
+              "No Booking",
+              "No booking found for this car.",
+              "info"
+            );
+          }
+
+          const bookingId = userBooking._id;
+
+          // 2️⃣ Update car status → available
+          const carCancelRes = await axiosInstance.patch(`/cars/cancel/${id}`);
+
+          if (carCancelRes.data.modifiedCount > 0) {
+            setCar((prev) => ({ ...prev, status: "available" }));
+
+            // 3️⃣ Delete booking from database
+            await axiosInstance.delete(`/bookings/${bookingId}`);
+
+            Swal.fire(
+              "Cancelled!",
+              "The booking has been cancelled and removed.",
+              "success"
+            );
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire("Error!", "Something went wrong!", "error");
+        }
       }
     });
   };
@@ -128,7 +153,7 @@ const CarsDetails = () => {
             status?.toLowerCase() === "available" ? "bg-white" : "bg-yellow-400"
           } top-4 right-4 capitalize`}
         >
-          {status}
+          {status.toLowerCase() === "available"? "Available" : "Booked"}
         </span>
       </div>
       <div className=" h-120 w-2/5 rounded-2xl pl-2">
@@ -168,7 +193,7 @@ const CarsDetails = () => {
             </button>
           ) : (
             <button
-              onClick={handleCancleBook}
+              onClick={() => handleCancleBook(id)}
               className="bg-red-500 rounded-full text-sm text-white py-2 w-full"
             >
               Cancle Booking
@@ -181,3 +206,49 @@ const CarsDetails = () => {
 };
 
 export default CarsDetails;
+
+// const handleCancleBook = async () => {
+//   Swal.fire({
+//     title: "বুকিং বাতিল করবেন?",
+//     text: "এই গাড়িটি আবার available হয়ে যাবে!",
+//     icon: "warning",
+//     showCancelButton: true,
+//     confirmButtonColor: "#3085d6",
+//     cancelButtonColor: "#d33",
+//     confirmButtonText: "হ্যাঁ, Cancel করি!",
+//   }).then(async (result) => {
+//     if (result.isConfirmed) {
+//       // ১️⃣ প্রথমে এই user এর booking বের করি
+//       const bookingRes = await axiosInstance.get(
+//         `/bookings?email=${user.email}`
+//       );
+//       const userBooking = bookingRes.data.find((b) => b.car_id === id);
+
+//       if (!userBooking) {
+//         return Swal.fire(
+//           "Error!",
+//           "এই গাড়ির কোনো Booking পাওয়া যায়নি!",
+//           "error"
+//         );
+//       }
+
+//       const bookingId = userBooking._id;
+
+//       // ২️⃣ গাড়ির status আবার available করি
+//       const res = await axiosInstance.patch(`/cars/cancel/${id}`);
+
+//       if (res.data.modifiedCount > 0) {
+//         setCar((prev) => ({ ...prev, status: "available" }));
+
+//         // ৩️⃣ এখন booking ডাটা delete করি
+//         await axiosInstance.delete(`/bookings/${bookingId}`);
+
+//         Swal.fire(
+//           "Cancelled!",
+//           "Booking সফলভাবে বাতিল করা হয়েছে!",
+//           "success"
+//         );
+//       }
+//     }
+//   });
+// };

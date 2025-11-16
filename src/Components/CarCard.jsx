@@ -15,7 +15,7 @@ const CarCard = ({car}) => {
                   car.status === "available" ? "bg-white" : "bg-yellow-400"
                 }`}
               >
-                {car.status}
+                {car.status === "available"? "available": "booked"}
               </span>
             </div>
             <div className="mt-3 px-2">
@@ -27,7 +27,7 @@ const CarCard = ({car}) => {
               </div>
               <p className="text-sm text-zinc-700 mb-2">{car?.provider?.name}</p>
               <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold">$400</p>
+                <p className="text-lg font-semibold">{car.rent_price}tk</p>
                 <Link
                   to={`/cars-details/${car._id}`}
                   className="hover:text-yellow-400 text-sm flex items-center gap-2 py-2 px-8 opacity-75 rounded-full"

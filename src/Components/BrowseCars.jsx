@@ -25,7 +25,7 @@ const BrowseCars = () => {
       </div>
       <div className="grid grid-cols-3 place-items-center gap-5 my-10 mb-20">
         {cards.map((car) => (
-          <CarCard car={car}></CarCard>
+          <CarCard key={car._id}car={car}></CarCard>
         ))}
       </div>
     </div>

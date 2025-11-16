@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router";
 
 const AddCars = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,7 +38,7 @@ const AddCars = () => {
         console.log("server responsed", data);
         if (data.insertedId) {
           alert("Car Added Successfully!");
-          navigate("/")
+          navigate("/");
           form.reset();
         } else {
           alert("Something went wrong!");
@@ -73,24 +73,50 @@ const AddCars = () => {
             <label className="mt-2 font-semibold text-zinc-700 text-sm">
               Category
             </label>
+            <select
+              name="category"
+              className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
+              required
+            >
+              <option disabled value="">
+                Select Category
+              </option>
+              <option value="Sedan">Sedan</option>
+              <option value="SUV">SUV</option>
+              <option value="Hatchback">Hatchback</option>
+              <option value="Luxury">Luxury</option>
+              <option value="Electric">Electric</option>
+            </select>
+          </div>
+        </div>
+        <div className="flex gap-5 w-full">
+          <div className="w-1/2">
+            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+              Photo URL
+            </label>
             <input
               type="text"
               className="input w-full rounded-full"
-              name="category"
-              placeholder="category"
+              name="photo_url"
+              placeholder="Paste URL"
             />
           </div>
-        </div>
-        <div className="flex flex-col gap-2 w-full">
-          <label className="mt-2 font-semibold text-zinc-700 text-sm">
-            Photo URL
-          </label>
-          <input
-            type="text"
-            className="input w-full rounded-full"
-            name="photo_url"
-            placeholder="Paste URL"
-          />
+          <div className="flex flex-col w-1/2">
+            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+              Status
+            </label>
+            <select
+              name="status"
+              className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
+              required
+            >
+              <option disabled selected value="">
+                Status
+              </option>
+              <option value="available">Available</option>
+              <option value="booked">Booked</option>
+            </select>
+          </div>
         </div>
 
         <div className="flex items-center gap-5 w-full justify-between">
