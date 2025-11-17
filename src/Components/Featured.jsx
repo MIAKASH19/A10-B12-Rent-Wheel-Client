@@ -4,25 +4,68 @@ import CarCard from "./CarCard";
 
 const Featured = () => {
   const [cards, setCards] = useState([]);
+  const [allCards, setAllCards] = useState([]);
   const axiosInstance = useAxios();
 
   useEffect(() => {
     axiosInstance.get("/featured-cars").then((res) => {
       setCards(res.data);
+      setAllCards(res.data);
     });
   }, []);
 
+  const SearchOperation = (e) => {
+    const value = e.target.value.toLowerCase();
+
+    if (value) {
+      const result = allCards.filter((card) =>
+        card.car_name.toLowerCase().includes(value)
+      );
+      return setCards(result);
+    }
+    setCards(allCards);
+  };
+
   return (
     <div className="w-full min-h-screen px-10 py-20">
-      <div className="h-20 w-full flex items-center justify-between  border-b-2 border-b-zinc-200">
+      <div className="h-20 w-full relative flex items-center justify-between  border-b-2 border-b-zinc-200">
         <h3 className="text-4xl font-momo opacity-60">02</h3>
-        <h2 className="text-4xl">Featured Cars</h2>
-        <span className="text-4xl"></span>
+        <h2 className="text-4xl text-center mx-auto absolute left-1/2 -translate-x-1/2">
+          Featured Cars
+        </h2>
+        <label className="input rounded-full w-70">
+          <svg
+            className="h-[1em] opacity-50"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <g
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeWidth="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </g>
+          </svg>
+          <input
+            onChange={SearchOperation}
+            type="search"
+            required
+            placeholder="Search"
+          />
+        </label>
       </div>
       <div className="grid grid-cols-3 place-items-center gap-5 mt-10">
-        {cards.map((car) => (
-          <CarCard car={car}></CarCard>
-        ))}
+        {cards.length === 0 ? (
+          <p className="text-4xl opacity-80 col-span-3 text-center">
+            Sorry , No cars found
+          </p>
+        ) : (
+          cards.map((car) => <CarCard key={car._id} car={car} />)
+        )}
       </div>
     </div>
   );
