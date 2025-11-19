@@ -90,7 +90,7 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full min-h-screen px-10 ">
+    <div className="w-full min-h-screen px-10 my-20">
       <div className=" rounded-2xl w-full h-screen flex gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
         <div className="bg-[url(https://images.unsplash.com/photo-1618353482480-61ca5a9a7879?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGNhcnxlbnwwfDF8MHx8fDA%3D)] bg-cover bg-bottom flex flex-col items-start justify-between w-1/2 h-full rounded-2xl p-5">
           <span className="bg-white text-sm rounded-full px-4 py-2">

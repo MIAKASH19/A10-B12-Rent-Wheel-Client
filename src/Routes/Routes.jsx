@@ -3,7 +3,7 @@ import HomeLayouts from "../Layouts/RootLayout";
 import CarsDetails from "../Components/CarsDetails";
 import Home from "../Components/Home";
 import SignUp from "../Components/SignUp";
-import Login from "../Layouts/Login";
+import Login from "../Components/Login";
 import BrowseCars from "../Components/BrowseCars";
 import AddCars from "../Components/AddCars";
 import MyBookings from "../Components/MyBookings";

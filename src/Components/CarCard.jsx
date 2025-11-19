@@ -1,29 +1,26 @@
 import React from "react";
 import { Link } from "react-router";
 import { PiArrowUpRightBold } from "react-icons/pi";
-import AOS from "aos";
-import "aos/dist/aos.css";
-AOS.init();
+import { motion } from "framer-motion";
 
 const CarCard = ({ car }) => {
   return (
-    <div
+    <motion.div
       key={car._id}
-      data-aos="fade-up"
-      data-aos-offset="200"
-      data-aos-delay="50"
-      data-aos-duration="500"
-      data-aos-easing="ease-in-out"
       className="border border-zinc-200 w-90 h-fit rounded-4xl shadow-2xl p-4"
+      initial={{ opacity: 0, y: 200 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.05, boxShadow: "0px 15px 25px rgba(0,0,0,0.2)" }}
+      transition={{ duration: 0.4 }}
     >
       <div className="bg-zinc-800 relative w-full h-50 rounded-3xl overflow-hidden">
         <img src={car.image} className="w-full h-full object-cover" />
         <span
-          className={`rounded-full px-3 py-1 bg-green-500 text-xs absolute top-3 capitalize right-3 ${
-            car.status === "available" ? "bg-white" : "bg-yellow-400"
+          className={`rounded-full px-3 py-1 text-xs absolute top-3 right-3 ${
+            car.status === "available" ? "bg-white text-green-500" : "bg-yellow-400 text-zinc-800"
           }`}
         >
-          {car.status === "available" ? "available" : "booked"}
+          {car.status === "available" ? "Available" : "Booked"}
         </span>
       </div>
       <div className="mt-3 px-2">
@@ -35,7 +32,7 @@ const CarCard = ({ car }) => {
         </div>
         <p className="text-sm text-zinc-700 mb-2">{car?.provider?.name}</p>
         <div className="flex items-center justify-between">
-          <p className="text-lg font-semibold">{car.rent_price}tk</p>
+          <p className="text-lg font-semibold">{car.rent_price} tk</p>
           <Link
             to={`/cars-details/${car._id}`}
             className="hover:text-yellow-400 text-sm flex items-center gap-2 py-2 px-8 opacity-75 rounded-full"
@@ -45,7 +42,7 @@ const CarCard = ({ car }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

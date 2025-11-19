@@ -34,7 +34,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full min-h-screen px-10 ">
+    <div className="w-full min-h-screen px-10 my-20">
       <div className=" rounded-2xl w-full h-screen flex gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
         <div className="bg-[url(https://images.unsplash.com/photo-1608320066644-cfe4ae0e8fa7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTYyfHxjYXJ8ZW58MHwxfDB8fHww)] bg-cover bg-center flex flex-col items-start justify-between w-1/2 h-full rounded-2xl p-5">
           <span className="bg-white text-sm rounded-full px-4 py-2">

@@ -2,17 +2,18 @@ import { useContext, useEffect, useRef, useState } from "react";
 import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../Context/AuthContext";
 import Swal from "sweetalert2";
+import Lottie from "lottie-react";
+import emptyAnimation from "../../public/Empty State.json";
+import successAnimation from "../../public/Done.json";
 
 const MyListings = () => {
   const { user } = useContext(AuthContext);
   const axiosInstance = useAxios();
-
+  const [showSuccess, setShowSuccess] = useState(false);
   const [carList, setCarList] = useState([]);
   const [selectedListing, setSelectedListing] = useState(null);
-
   const updateModalRef = useRef(null);
 
-  // 🔹 Provider যে গাড়িগুলো যোগ করেছে সেগুলো লোড করা
   useEffect(() => {
     if (!user?.email) return;
 
@@ -22,7 +23,6 @@ const MyListings = () => {
       .catch((err) => console.error(err));
   }, [user]);
 
-  // 🔹 Update Modal খোলা
   const handleUpdateButton = (listing) => {
     setSelectedListing(listing);
     updateModalRef.current.showModal();
@@ -32,24 +32,38 @@ const MyListings = () => {
     updateModalRef.current.close();
   };
 
-  // 🔹 গাড়ি ডিলিট করা
   const handleListingDelete = async (id) => {
-    const res = await axiosInstance.delete(`/cars/${id}`);
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
 
-    if (res.data.deletedCount > 0) {
-      setCarList(carList.filter((c) => c._id !== id));
+    if (result.isConfirmed) {
+      try {
+        const res = await axiosInstance.delete(`/cars/${id}`);
 
-      Swal.fire({
-        icon: "success",
-        title: "Deleted!",
-        text: "গাড়িটি সফলভাবে মুছে ফেলা হয়েছে।",
-        timer: 1500,
-        showConfirmButton: false,
-      });
+        if (res.data.deletedCount > 0) {
+          setCarList(carList.filter((c) => c._id !== id));
+
+          setShowSuccess(true);
+          setTimeout(() => setShowSuccess(false), 3000);
+        }
+      } catch(error) {
+        Swal.fire({
+                  icon: "error",
+                  title: "Error!",
+                  text: "Something went wrong. Please try again.",
+                });
+      }
     }
   };
 
-  // 🔹 Update Submit
   const handleUpdateFormSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -77,7 +91,7 @@ const MyListings = () => {
           Swal.fire({
             icon: "success",
             title: "Updated!",
-            text: "গাড়ির তথ্য সফলভাবে আপডেট হয়েছে।",
+            text: "Your Car Info is updated, Successfully",
             timer: 2000,
             showConfirmButton: false,
           });
@@ -86,222 +100,232 @@ const MyListings = () => {
   };
 
   return (
-    <div className="min-h-screen px-10">
+    <div className="min-h-screen px-10 mt-20">
       <h1 className="text-4xl border-b border-zinc-200 pb-4">
         My Car Listings : {carList.length}
       </h1>
 
-      <div className="overflow-x-auto">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Sl</th>
-              <th>Car name</th>
-              <th>Category</th>
-              <th>Rent</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+      {carList.length === 0 && !showSuccess ? (
+        <div className="flex flex-col items-center justify-center mt-20">
+          <Lottie animationData={emptyAnimation} loop className="w-72" />
+          <p className="text-xl text-zinc-600 mt-4">
+            You have no car listings yet.
+          </p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Sl</th>
+                <th>Car name</th>
+                <th>Category</th>
+                <th>Rent</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {carList.map((listing, index) => (
+                <tr key={listing._id}>
+                  <th>{index + 1}</th>
+                  <td>{listing.car_name}</td>
+                  <td>{listing.category}</td>
+                  <td>{listing.rent_price} tk</td>
+                  <td className="capitalize">{listing.status}</td>
 
-          <tbody>
-            {carList.map((listing, index) => (
-              <tr key={listing._id}>
-                <th>{index + 1}</th>
-                <td>{listing.car_name}</td>
-                <td>{listing.category}</td>
-                <td>{listing.rent_price} tk</td>
-                <td className="capitalize">{listing.status}</td>
+                  <td>
+                    <button
+                      onClick={() => handleUpdateButton(listing)}
+                      className="text-white text-xs px-4 py-1 rounded-full bg-black mr-3"
+                    >
+                      Update
+                    </button>
 
-                <td>
+                    <button
+                      onClick={() => handleListingDelete(listing._id)}
+                      className="text-white text-xs px-4 py-1 rounded-full bg-red-500"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <dialog
+            ref={updateModalRef}
+            className="modal modal-bottom h-screen sm:modal-middle"
+          >
+            <div className="modal-box h-full">
+              <form onSubmit={handleUpdateFormSubmit} className="">
+                <h1 className="text-4xl font-semibold text-center mb-2">
+                  Update desired fields
+                </h1>
+
+                <div className="flex items-center gap-5 w-full justify-between">
+                  <div className="flex flex-col gap-2 w-1/2">
+                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
+                      Car Name
+                    </label>
+                    <input
+                      type="text"
+                      className="input w-full rounded-full"
+                      name="car_name"
+                      placeholder="Car name"
+                      defaultValue={selectedListing?.car_name}
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2 w-1/2">
+                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
+                      Category
+                    </label>
+                    <select
+                      name="category"
+                      className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
+                      required
+                      defaultValue={selectedListing?.category}
+                    >
+                      <option disabled value="">
+                        Select Category
+                      </option>
+                      <option value="Sedan">Sedan</option>
+                      <option value="SUV">SUV</option>
+                      <option value="Hatchback">Hatchback</option>
+                      <option value="Luxury">Luxury</option>
+                      <option value="Electric">Electric</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="flex gap-5 w-full mt-2">
+                  <div className="w-1/2">
+                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
+                      Photo URL
+                    </label>
+                    <input
+                      type="text"
+                      className="input w-full rounded-full"
+                      name="photo_url"
+                      placeholder="Paste URL"
+                      defaultValue={selectedListing?.image}
+                    />
+                  </div>
+
+                  <div className="flex flex-col w-1/2">
+                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
+                      Status
+                    </label>
+                    <select
+                      name="status"
+                      className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
+                      required
+                      defaultValue={selectedListing?.status}
+                    >
+                      <option disabled value="">
+                        Status
+                      </option>
+                      <option value="available">Available</option>
+                      <option value="booked">Booked</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-5 w-full justify-between">
+                  <div className="flex flex-col w-1/2">
+                    <label className="mt-2 text-sm">Provider Name</label>
+                    <input
+                      type="text"
+                      className="input w-full rounded-full"
+                      name="provider_name"
+                      placeholder="Name"
+                      disabled
+                      defaultValue={selectedListing?.provider_name}
+                    />
+                  </div>
+
+                  <div className="flex flex-col w-1/2">
+                    <label className="mt-2 text-sm">Provider Email</label>
+                    <input
+                      type="email"
+                      className="input w-full rounded-full"
+                      name="provider_email"
+                      placeholder="Provider Email"
+                      disabled
+                      defaultValue={selectedListing?.provider_email}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-5 w-full justify-between">
+                  <div className="flex flex-col gap-2 w-1/2">
+                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
+                      Rent Price
+                    </label>
+                    <input
+                      type="number"
+                      className="input w-full rounded-full"
+                      name="rent_price"
+                      placeholder="Rent Price"
+                      defaultValue={selectedListing?.rent_price}
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-2 w-1/2">
+                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
+                      Location
+                    </label>
+                    <input
+                      type="text"
+                      className="input w-full rounded-full"
+                      name="location"
+                      placeholder="location"
+                      defaultValue={selectedListing?.location}
+                    />
+                  </div>
+                </div>
+
+                <textarea
+                  name="description"
+                  className="border w-full rounded-2xl border-zinc-300 p-3 mt-5"
+                  placeholder="Write description..."
+                  cols="40"
+                  rows="3"
+                  defaultValue={selectedListing?.description}
+                ></textarea>
+
+                <div className="flex items-center gap-3">
                   <button
-                    onClick={() => handleUpdateButton(listing)}
-                    className="text-white text-xs px-4 py-1 rounded-full bg-black mr-3"
+                    type="submit"
+                    className="bg-black text-white w-full transition-all duration-300 py-2 rounded-3xl mt-3 cursor-pointer"
                   >
                     Update
                   </button>
 
                   <button
-                    onClick={() => handleListingDelete(listing._id)}
-                    className="text-white text-xs px-4 py-1 rounded-full bg-red-500"
+                    type="button"
+                    onClick={handleCancelModalButton}
+                    className="bg-red-600 text-white w-full transition-all duration-300 py-2 rounded-3xl mt-3 cursor-pointer"
                   >
-                    Delete
+                    Cancel
                   </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {/* Update Modal */}
-        <dialog
-          ref={updateModalRef}
-          className="modal modal-bottom h-screen sm:modal-middle"
-        >
-          <div className="modal-box h-full">
-            <form onSubmit={handleUpdateFormSubmit} className="">
-              <h1 className="text-4xl font-semibold text-center mb-2">
-                Update desired fields
-              </h1>
-
-              {/* Car Name + Category */}
-              <div className="flex items-center gap-5 w-full justify-between">
-                <div className="flex flex-col gap-2 w-1/2">
-                  <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                    Car Name
-                  </label>
-                  <input
-                    type="text"
-                    className="input w-full rounded-full"
-                    name="car_name"
-                    placeholder="Car name"
-                    defaultValue={selectedListing?.car_name}
-                  />
                 </div>
-
-                <div className="flex flex-col gap-2 w-1/2">
-                  <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                    Category
-                  </label>
-                  <select
-                    name="category"
-                    className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
-                    required
-                    defaultValue={selectedListing?.category}
-                  >
-                    <option disabled value="">
-                      Select Category
-                    </option>
-                    <option value="Sedan">Sedan</option>
-                    <option value="SUV">SUV</option>
-                    <option value="Hatchback">Hatchback</option>
-                    <option value="Luxury">Luxury</option>
-                    <option value="Electric">Electric</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Photo & Status */}
-              <div className="flex gap-5 w-full mt-2">
-                <div className="w-1/2">
-                  <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                    Photo URL
-                  </label>
-                  <input
-                    type="text"
-                    className="input w-full rounded-full"
-                    name="photo_url"
-                    placeholder="Paste URL"
-                    defaultValue={selectedListing?.image}
-                  />
-                </div>
-
-                <div className="flex flex-col w-1/2">
-                  <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                    Status
-                  </label>
-                  <select
-                    name="status"
-                    className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
-                    required
-                    defaultValue={selectedListing?.status}
-                  >
-                    <option disabled value="">
-                      Status
-                    </option>
-                    <option value="available">Available</option>
-                    <option value="booked">Booked</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Provider Name + Email */}
-              <div className="flex items-center gap-5 w-full justify-between">
-                <div className="flex flex-col w-1/2">
-                  <label className="mt-2 text-sm">Provider Name</label>
-                  <input
-                    type="text"
-                    className="input w-full rounded-full"
-                    name="provider_name"
-                    placeholder="Name"
-                    disabled
-                    defaultValue={selectedListing?.provider_name}
-                  />
-                </div>
-
-                <div className="flex flex-col w-1/2">
-                  <label className="mt-2 text-sm">Provider Email</label>
-                  <input
-                    type="email"
-                    className="input w-full rounded-full"
-                    name="provider_email"
-                    placeholder="Provider Email"
-                    disabled
-                    defaultValue={selectedListing?.provider_email}
-                  />
-                </div>
-              </div>
-
-              {/* Rent + Location */}
-              <div className="flex items-center gap-5 w-full justify-between">
-                <div className="flex flex-col gap-2 w-1/2">
-                  <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                    Rent Price
-                  </label>
-                  <input
-                    type="number"
-                    className="input w-full rounded-full"
-                    name="rent_price"
-                    placeholder="Rent Price"
-                    defaultValue={selectedListing?.rent_price}
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2 w-1/2">
-                  <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                    Location
-                  </label>
-                  <input
-                    type="text"
-                    className="input w-full rounded-full"
-                    name="location"
-                    placeholder="location"
-                    defaultValue={selectedListing?.location}
-                  />
-                </div>
-              </div>
-
-              {/* Description */}
-              <textarea
-                name="description"
-                className="border w-full rounded-2xl border-zinc-300 p-3 mt-5"
-                placeholder="Write description..."
-                cols="40"
-                rows="3"
-                defaultValue={selectedListing?.description}
-              ></textarea>
-
-              {/* Buttons */}
-              <div className="flex items-center gap-3">
-                <button
-                  type="submit"
-                  className="bg-black text-white w-full transition-all duration-300 py-2 rounded-3xl mt-3 cursor-pointer"
-                >
-                  Update
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleCancelModalButton}
-                  className="bg-red-600 text-white w-full transition-all duration-300 py-2 rounded-3xl mt-3 cursor-pointer"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </dialog>
-      </div>
+              </form>
+            </div>
+          </dialog>
+        </div>
+      )}
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+          <Lottie
+            animationData={successAnimation}
+            loop={false}
+            className="w-52"
+          />
+        </div>
+      )}
     </div>
   );
 };

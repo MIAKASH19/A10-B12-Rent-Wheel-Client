@@ -38,11 +38,6 @@ const Hero = () => {
   return (
     <div className=" w-full min-h-screen px-8 pt-20 ">
       <Swiper
-        // data-aos="fade-up"
-        // data-aos-offset="200"
-        // data-aos-delay="50"
-        // data-aos-duration="500"
-        // data-aos-easing="ease-in-out"
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
@@ -50,7 +45,7 @@ const Hero = () => {
           clickable: true,
         }}
         autoplay={{
-          delay: 4500,
+          delay: 8500,
           disableOnInteraction: false,
         }}
         navigation={false}

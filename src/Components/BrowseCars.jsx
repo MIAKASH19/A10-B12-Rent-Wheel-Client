@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios";
 import CarCard from "./CarCard";
+import { AuthContext } from "../Context/AuthContext";
+import Lottie from "lottie-react";
+import emptyAnimation from "../../public/Empty State.json";
 
 const BrowseCars = () => {
   const [cards, setCards] = useState([]);
-
   const [allCards, setAllCards] = useState([]);
   const axiosInstance = useAxios();
+  const { loading, setLoading } = useContext(AuthContext);
 
   useEffect(() => {
+    setLoading(true);
     axiosInstance.get("/browse-cars").then((res) => {
       setCards(res.data);
-      setAllCards(res.data)
+      setAllCards(res.data);
+      setLoading(false);
     });
   }, []);
 
@@ -67,15 +72,21 @@ const BrowseCars = () => {
           />
         </label>
       </div>
-      <div className="grid grid-cols-3 place-items-center gap-5 my-10 mb-20">
-        {cards.length === 0 ? (
-          <p className="text-4xl opacity-80 col-span-3 text-center">
-            Sorry , No cars found
-          </p>
-        ) : (
-          cards.map((car) => <CarCard key={car._id} car={car} />)
-        )}
-      </div>
+
+      {loading ? (
+        <div className="flex items-center justify-center h-[40vh] ">
+          <span className="loading loading-spinner text-success"></span>
+        </div>
+      ) : cards.length === 0 ? (
+        <div className="flex flex-col items-center justify-center my-10">
+          <Lottie animationData={emptyAnimation} loop className="w-72" />
+          <p className="text-xl text-zinc-600 mt-4">No Car Found Yet.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 place-items-center gap-5 my-10 mb-20">
+          {cards.map((car) => <CarCard key={car._id} car={car} />)}
+        </div>
+      )}
     </div>
   );
 };

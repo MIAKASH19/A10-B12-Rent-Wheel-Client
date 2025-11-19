@@ -42,7 +42,7 @@ const AddCars = () => {
         Swal.fire({
           icon: "success",
           title: "Car Added!",
-          text: "গাড়ি সফলভাবে যোগ করা হয়েছে।",
+          text: "The Car Added Successfully",
           timer: 2000,
           showConfirmButton: false,
         });
@@ -52,7 +52,7 @@ const AddCars = () => {
         Swal.fire({
           icon: "error",
           title: "Oops!",
-          text: "কিছু ভুল হয়েছে। আবার চেষ্টা করুন।",
+          text: "Something Went Wrong!",
         });
       }
     } catch (err) {
@@ -60,7 +60,7 @@ const AddCars = () => {
       Swal.fire({
         icon: "error",
         title: "Failed",
-        text: "গাড়ি যোগ করা যায়নি। আবার চেষ্টা করুন।",
+        text: "Car is not Added. Please try again.",
       });
     }
   };
