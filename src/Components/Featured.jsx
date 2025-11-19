@@ -28,9 +28,9 @@ const Featured = () => {
 
   return (
     <div className="w-full min-h-screen px-10 py-20">
-      <div className="h-20 w-full relative flex items-center justify-between  border-b-2 border-b-zinc-200">
+      <div className="sm:h-20 h-50 w-full relative flex sm:flex-row flex-col gap-4 items-center justify-between  border-b-2 border-b-zinc-200 pb-5 sm:pb-0">
         <h3 className="text-4xl font-momo opacity-60">02</h3>
-        <h2 className="text-4xl text-center mx-auto absolute left-1/2 -translate-x-1/2">
+        <h2 className="text-4xl text-center mx-auto absolute left-1/2 top-1/3 sm:top-0 w-full -translate-x-1/2">
           Featured Cars
         </h2>
         <label className="input rounded-full w-70">
@@ -58,7 +58,7 @@ const Featured = () => {
           />
         </label>
       </div>
-      <div className="grid grid-cols-3 place-items-center gap-5 mt-10">
+      <div className="grid sm:grid-cols-3 grid-cols-1 place-items-center gap-5 mt-10">
         {cards.length === 0 ? (
           <p className="text-4xl opacity-80 col-span-3 text-center">
             Sorry , No cars found

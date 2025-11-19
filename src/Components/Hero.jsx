@@ -23,7 +23,7 @@ const sliderData = [
   {
     title: "Business Class Comfort.",
     description:
-      "Premium sedans for meetings, events, and executive travel — arrive in style, every time.",
+      "Premium sedans for meetings, events, and executive travel - arrive in style, every time.",
     url: "https://images.unsplash.com/photo-1650803960583-d846f36a7127?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
@@ -36,7 +36,7 @@ const sliderData = [
 
 const Hero = () => {
   return (
-    <div className=" w-full min-h-screen px-8 pt-20 ">
+    <div className=" w-full sm:min-h-screen h-fit sm:px-8 px-4 pt-20 ">
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -50,23 +50,24 @@ const Hero = () => {
         }}
         navigation={false}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper h-screen overflow-hidden mb-20 "
+        className="mySwiper sm:h-screen h-[25vh] overflow-hidden sm:mb-20 mb-10"
       >
         {sliderData.map((slide, index) => (
           <SwiperSlide>
-            <div key={index} className="relative w-full h-screen  rounded-2xl overflow-hidden">
+            <div key={index} className="relative w-full sm:h-screen h-full  rounded-2xl overflow-hidden">
             <img
               src={slide.url}
               className="w-full h-full object-cover"
             />
-            <div className="absolute bg-rd-500 top-1/4 left-0 w-1/2 h-1/2 flex flex-col items-start gap-5 justify-center text-white pl-10">
-              <h1 className="text-7xl ">{slide.title}</h1>
-              <p>
+            <div className="absolute bg-rd-500 top-1/4 left-0 sm:w-1/2 w-full h-1/2 flex flex-col items-start sm:gap-5 gap-3 justify-center text-white sm:pl-10 px-4">
+              <h1 className="sm:text-7xl text-3xl w-full font-semibold sm:font-normal sm:full z-[2]">{slide.title}</h1>
+              <div className="bg-black w-full h-full fixed top-0 left-0 opacity-20 z-[1]"></div>
+              <p className="hidden sm:block">
                 {slide.description}
               </p>
               <Link
                 to="/browse-cars"
-                className="bg-[#A0BB70] px-6 py-3 rounded-full text-white transition-all duration-300 hover:bg-black"
+                className="bg-[#A0BB70] px-6 py-3 rounded-full text-sm sm:text-md font-bold sm:font-normal text-white transition-all duration-300 hover:bg-black z-[2]"
               >
                 Browse Cars
               </Link>

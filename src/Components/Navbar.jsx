@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar fixed top-0 left-0 bg-base-100 px-8 z-99 border-b border-zinc-300  ">
+    <div className="navbar fixed top-0 left-0 bg-base-100 sm:px-8 px-0 z-99 border-b border-zinc-300 ">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -37,22 +37,18 @@ const Navbar = () => {
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a href="#">Item 2</a>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            <Link className="my-3 mx-2" to='/'>Home</Link>
+            <Link className="my-3 mx-2" to='/browse-cars'>Browse Car</Link>
+            <Link className="my-3 mx-2" to='/add-car'>Add Car</Link>
+            <Link className="my-3 mx-2" to='/my-listings'>My Listings</Link>
+            <Link className="my-3 mx-2" to='/my-bookings'>My Bookings</Link>
           </ul>
         </div>
-        <Link to="/" className="text-xl">
+        <Link to="/" className="sm:text-xl text-sm">
           Rent-Wheels
         </Link>
       </div>
-      <div className="navbar-center gap-2 ">
+      <div className="navbar-center hidden md:block gap-2 ">
         <NavLink
           to={"/"}
           className=" relative rounded-full w-fit text-sm transition-all duration-300 px-4 py-2"

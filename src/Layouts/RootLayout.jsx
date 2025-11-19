@@ -4,7 +4,7 @@ import { Outlet } from 'react-router';
 
 const HomeLayouts = () => {
   return (
-    <div className='font-inter'>
+    <div className='font-inter overflow-x-hidden'>
         <Navbar></Navbar>
         <Outlet></Outlet>
         <Footer></Footer>
