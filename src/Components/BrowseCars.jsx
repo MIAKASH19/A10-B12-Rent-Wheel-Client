@@ -29,7 +29,7 @@ const BrowseCars = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center flex-col my-10 ">
+      <div className="flex items-center justify-center flex-col my-30 mb-15 ">
         <h1 className="text-7xl font-medium tracking-tight">
           Drive Your Dreams, Rent Your Ride
         </h1>

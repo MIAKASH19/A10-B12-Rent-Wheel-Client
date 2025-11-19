@@ -1,6 +1,9 @@
 import React from "react";
 import { PiArrowUpRightBold } from "react-icons/pi";
 import { Link } from "react-router";
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 
 const Services = () => {
   return (
@@ -10,7 +13,14 @@ const Services = () => {
         <h2 className="text-4xl">Our Services</h2>
         <span className="text-4xl"></span>
       </div>
-      <div className="w-full flex items-center justify-between mt-10">
+      <div
+        className="w-full flex items-center justify-between mt-10"
+        data-aos="fade-up"
+        data-aos-offset="200"
+        data-aos-delay="50"
+        data-aos-duration="500"
+        data-aos-easing="ease-in-out"
+      >
         <div className='relative group w-100 h-70 overflow-hidden shadow-2xl rounded-3xl px-5 py-7 bg-[url("https://img.freepik.com/free-photo/happy-couple-car-showroom-dealership_23-2149117139.jpg?semt=ais_hybrid&w=740&q=80")] bg-cover'>
           <span className="bg-white group-hover:bg-black group-hover:text-white transition-all duration-300 rounded-full py-3 px-5 text-sm">
             Long Term Rentals
@@ -43,7 +53,12 @@ const Services = () => {
           our chauffeur-driven vehicles guarantee a stylish, comfortable, and
           punctual arrival every time.
         </p>
-        <Link to="/browse-cars" className="bg-[#ffe042] px-6 py-3 rounded-full text-black transition-all duration-300 hover:bg-black hover:text-white">Browse Cars</Link>
+        <Link
+          to="/browse-cars"
+          className="bg-[#ffe042] px-6 py-3 rounded-full text-black transition-all duration-300 hover:bg-black hover:text-white"
+        >
+          Browse Cars
+        </Link>
       </div>
     </div>
   );

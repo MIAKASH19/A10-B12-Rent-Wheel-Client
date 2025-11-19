@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
 
   const handleSignOut = () => {
-    alert("User Signed Out")
+    alert("User Signed Out");
     signOutUser()
       .then(() => {})
       .catch();
@@ -48,44 +48,79 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <Link to="/" className="text-xl">Rent-Wheels</Link>
+        <Link to="/" className="text-xl">
+          Rent-Wheels
+        </Link>
       </div>
       <div className="navbar-center gap-2 ">
-        <Link
+        <NavLink
           to={"/"}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
+          className=" relative rounded-full w-fit text-sm transition-all duration-300 px-4 py-2"
         >
-          Home
-        </Link>
-        <Link
+          {({ isActive }) => (
+            <>
+              {isActive && (
+                <span className="w-2 h-2 rounded-full bg-green-400 absolute top-1/2 left-2 -translate-x-full -translate-y-1/2"></span>
+              )}
+              Home
+            </>
+          )}
+        </NavLink>
+        <NavLink
           to={"/browse-cars"}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
+          className="relative rounded-full w-fit text-sm transition-all duration-300 px-4 py-2"
         >
-          Browse Cars
-        </Link>
-        <Link
+          {({ isActive }) => (
+            <>
+              {isActive && (
+                <span className="w-2 h-2 rounded-full bg-green-400 absolute top-1/2 left-2 -translate-x-full -translate-y-1/2"></span>
+              )}
+              Browse Car
+            </>
+          )}
+        </NavLink>
+        <NavLink
           to={"/add-car"}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
+          className="relative rounded-full w-fit text-sm transition-all duration-300 px-4 py-2"
         >
-          Add Car
-        </Link>
-        <Link
+          {({ isActive }) => (
+            <>
+              {isActive && (
+                <span className="w-2 h-2 rounded-full bg-green-400 absolute top-1/2 left-2 -translate-x-full -translate-y-1/2"></span>
+              )}
+              Add Car
+            </>
+          )}
+        </NavLink>
+        <NavLink
           to={`/my-listings?email=${user?.email}`}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
+          className="relative rounded-full w-fit text-sm transition-all duration-300 px-4 py-2"
         >
-          My Listings
-        </Link>
-        <Link
+          {({ isActive }) => (
+            <>
+              {isActive && (
+                <span className="w-2 h-2 rounded-full bg-green-400 absolute top-1/2 left-2 -translate-x-full -translate-y-1/2"></span>
+              )}
+              My Listings
+            </>
+          )}
+        </NavLink>
+        <NavLink
           to={`/my-bookings?email=${user?.email}`}
-          className="rounded-full w-fit text-sm hover:bg-zinc-200 transition-all duration-300 px-4 py-2"
+          className="relative rounded-full w-fit text-sm transition-all duration-300 px-4 py-2"
         >
-          My Bookings
-        </Link>
-        
+          {({ isActive }) => (
+            <>
+              {isActive && (
+                <span className="w-2 h-2 rounded-full bg-green-400 absolute top-1/2 left-2 -translate-x-full -translate-y-1/2"></span>
+              )}
+              My Bookings
+            </>
+          )}
+        </NavLink>
       </div>
       <div className="navbar-end gap-4 text-zinc-800 hidden lg:flex">
         {user ? (
-          //
           <div className="dropdown dropdown-bottom dropdown-end">
             <div
               tabIndex={0}
@@ -104,7 +139,7 @@ const Navbar = () => {
               </p>
               <button
                 onClick={handleSignOut}
-                className="bg-[#A0BB70] text-white transition-all duration-300 hover:bg-black py-2 rounded-3xl mt-3"
+                className="bg-[#A0BB70] text-white transition-all duration-300-2 rounded-3xl mt-3"
               >
                 Sign Out
               </button>
