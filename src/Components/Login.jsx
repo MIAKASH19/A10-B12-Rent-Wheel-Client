@@ -14,13 +14,12 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
     signInUser(email, password)
       .then((result) => {
         e.target.reset();
         setUser(result.user);
         navigate(`${location.state ? location.state : "/"}`);
-        console.log(user);
+        // console.log(user);
       })
       .catch((error) => setError(error));
   };

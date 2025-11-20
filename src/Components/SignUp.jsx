@@ -17,7 +17,6 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(name, photo, email, password);
 
     const passRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
 
@@ -45,7 +44,6 @@ const Register = () => {
             })
               .then((res) => res.json())
               .then((data) => {
-                console.log("User saved to DB:", data);
                 setUser({ ...user, displayName: name, photoURL: photo });
                 navigate("/");
               });
@@ -82,7 +80,6 @@ const Register = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log("after post", data);
             navigate("/");
           });
       })

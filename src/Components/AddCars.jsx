@@ -36,7 +36,7 @@ const AddCars = () => {
       });
 
       const data = await res.json();
-      console.log("server response", data);
+      // console.log("server response", data);
 
       if (data.insertedId) {
         Swal.fire({

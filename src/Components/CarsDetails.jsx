@@ -8,7 +8,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 
 const CarsDetails = () => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [car, setCar] = useState({});
   const { id } = useParams();
   const axiosInstance = useAxios();
@@ -51,7 +51,7 @@ const CarsDetails = () => {
       body: JSON.stringify(newBookings),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {});
   };
 
   const handleBookNow = () => {
@@ -68,7 +68,7 @@ const CarsDetails = () => {
         axiosInstance
           .patch(`/cars/book/${id}`)
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.modifiedCount > 0) {
               setCar((prev) => ({
                 ...prev,
@@ -105,13 +105,12 @@ const CarsDetails = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          // 1️⃣ Get all bookings for this user
           const bookingRes = await axiosInstance.get(
             `/bookings?email=${user.email}`
           );
-          console.log(bookingRes);
+          // console.log(bookingRes);
           const userBooking = bookingRes.data.find((b) => b.car_id === id);
-          console.log(userBooking);
+          // console.log(userBooking);
 
           if (!userBooking) {
             return Swal.fire(
@@ -147,8 +146,12 @@ const CarsDetails = () => {
   return (
     <div className="w-full min-h-screen flex flex-col items-start gap-5 md:px-10 px-4 md:mt-10 mt-20 ">
       <div className="flex items-center gap-1 border-b border-zinc-100 w-full pb-3">
-        <button onClick={()=>navigate(-1)} className="hover:bg-zinc-100 flex items-center gap-3 transition-all duration-300 px-4 py-2 rounded-full">
-          <FaArrowLeft />Back
+        <button
+          onClick={() => navigate(-1)}
+          className="hover:bg-zinc-100 flex items-center gap-3 transition-all duration-300 px-4 py-2 rounded-full"
+        >
+          <FaArrowLeft />
+          Back
         </button>
       </div>
       <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
