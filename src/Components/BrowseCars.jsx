@@ -34,8 +34,8 @@ const BrowseCars = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center flex-col my-30 mb-15 ">
-        <h1 className="text-7xl font-medium tracking-tight">
+      <div className="flex items-center justify-center flex-col my-30 mb-15 px-4 md:px-0">
+        <h1 className="md:text-7xl text-6xl font-medium tracking-tight">
           Drive Your Dreams, Rent Your Ride
         </h1>
         <div></div>
@@ -83,7 +83,7 @@ const BrowseCars = () => {
           <p className="text-xl text-zinc-600 mt-4">No Car Found Yet.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-3 place-items-center gap-5 my-10 mb-20">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 place-items-center gap-5 my-10 mb-20">
           {cards.map((car) => <CarCard key={car._id} car={car} />)}
         </div>
       )}

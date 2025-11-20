@@ -54,12 +54,12 @@ const MyListings = () => {
           setShowSuccess(true);
           setTimeout(() => setShowSuccess(false), 3000);
         }
-      } catch(error) {
+      } catch (error) {
         Swal.fire({
-                  icon: "error",
-                  title: "Error!",
-                  text: "Something went wrong. Please try again.",
-                });
+          icon: "error",
+          title: "Error!",
+          text: "Something went wrong. Please try again.",
+        });
       }
     }
   };
@@ -100,7 +100,7 @@ const MyListings = () => {
   };
 
   return (
-    <div className="min-h-screen px-10 mt-20">
+    <div className="min-h-screen md:px-10 px-4 mt-20">
       <h1 className="text-4xl border-b border-zinc-200 pb-4">
         My Car Listings : {carList.length}
       </h1>
@@ -117,24 +117,26 @@ const MyListings = () => {
           <table className="table">
             <thead>
               <tr>
-                <th>Sl</th>
-                <th>Car name</th>
-                <th>Category</th>
-                <th>Rent</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th className="hidden sm:table-cell">Sl No.</th>
+                <th className="table-cell">Car name</th>
+                <th className="hidden sm:table-cell">Category</th>
+                <th className="hidden sm:table-cell">Status</th>
+                <th className="table-cell">Rent</th>
+                <th className="table-cell">Action</th>
               </tr>
             </thead>
             <tbody>
               {carList.map((listing, index) => (
                 <tr key={listing._id}>
-                  <th>{index + 1}</th>
-                  <td>{listing.car_name}</td>
-                  <td>{listing.category}</td>
-                  <td>{listing.rent_price} tk</td>
-                  <td className="capitalize">{listing.status}</td>
+                  <th className="hidden sm:table-cell">{index + 1}</th>
+                  <td className="table-cell">{listing.car_name}</td>
+                  <td className="hidden sm:table-cell">{listing.category}</td>
+                  <td className="hidden sm:table-cell capitalize">
+                    {listing.status}
+                  </td>
+                  <td className="table-cell">{listing.rent_price} tk</td>
 
-                  <td>
+                  <td className="flex">
                     <button
                       onClick={() => handleUpdateButton(listing)}
                       className="text-white text-xs px-4 py-1 rounded-full bg-black mr-3"

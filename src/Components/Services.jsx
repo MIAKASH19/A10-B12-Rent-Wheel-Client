@@ -14,7 +14,7 @@ const Services = () => {
         <span className="text-4xl"></span>
       </div>
       <div
-        className="w-full flex sm:flex-row flex-col gap-5 items-center justify-between mt-10 mx-auto "
+        className="w-full flex md:flex-row flex-col gap-5 items-center justify-between mt-10 mx-auto "
         data-aos="fade-up"
         data-aos-offset="200"
         data-aos-delay="50"

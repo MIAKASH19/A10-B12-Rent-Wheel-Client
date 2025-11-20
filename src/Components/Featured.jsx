@@ -58,7 +58,7 @@ const Featured = () => {
           />
         </label>
       </div>
-      <div className="grid sm:grid-cols-3 grid-cols-1 place-items-center gap-5 mt-10">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 place-items-center gap-5 mt-10">
         {cards.length === 0 ? (
           <p className="text-4xl opacity-80 col-span-3 text-center">
             Sorry , No cars found

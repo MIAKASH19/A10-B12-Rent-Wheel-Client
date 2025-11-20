@@ -90,9 +90,9 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full min-h-screen px-10 my-20">
-      <div className=" rounded-2xl w-full h-screen flex gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
-        <div className="bg-[url(https://images.unsplash.com/photo-1618353482480-61ca5a9a7879?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGNhcnxlbnwwfDF8MHx8fDA%3D)] bg-cover bg-bottom flex flex-col items-start justify-between w-1/2 h-full rounded-2xl p-5">
+    <div className="w-full md:min-h-screen h-fit md:px-10 px-4 my-20">
+      <div className=" rounded-2xl w-full md:h-screen lg:flex  gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
+        <div className="bg-[url(https://images.unsplash.com/photo-1618353482480-61ca5a9a7879?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGNhcnxlbnwwfDF8MHx8fDA%3D)] bg-cover bg-bottom hidden lg:flex flex-col items-start justify-between w-1/2 h-full rounded-2xl p-5">
           <span className="bg-white text-sm rounded-full px-4 py-2">
             Rent-Wheels
           </span>
@@ -101,17 +101,14 @@ const Register = () => {
             <h3 className="text-4xl w-4/5">
               Get accrss your personal hub for clarity and productivity.
             </h3>
-          </div>
+          </div>md
         </div>
-        <div className=" w-1/2  h-full flex items-center justify-center rounded-2xl ">
-          <div className="card w-4/5 h-full pt-6 ">
-            {/* <div className="w-fit mb-3">
-              <FaStarOfLife className="text-3xl text-[#ffe042] animate-spin duration-1000" style={{ animationDuration: "7s" }}  />
-            </div> */}
+        <div className=" md:w-1/2 w-full h-full flex items-center justify-center rounded-2xl ">
+          <div className="card md:w-4/5 w-full h-full pt-6 ">
             <h1 className="text-5xl font-semibold text-start">
               Create An Account
             </h1>
-            <p className="text-zinc-500 mt-2 text-sm text-start ">
+            <p className="text-zinc-500 mt-2 hidden lg:block text-sm text-start ">
               Access your lists, bookings and browse car anytime, anywhere and
               keep everything flowing in one place
             </p>

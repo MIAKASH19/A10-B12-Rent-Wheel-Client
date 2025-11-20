@@ -34,9 +34,9 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full min-h-screen px-10 my-20">
-      <div className=" rounded-2xl w-full h-screen flex gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
-        <div className="bg-[url(https://images.unsplash.com/photo-1608320066644-cfe4ae0e8fa7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTYyfHxjYXJ8ZW58MHwxfDB8fHww)] bg-cover bg-center flex flex-col items-start justify-between w-1/2 h-full rounded-2xl p-5">
+    <div className="w-full md:min-h-screen h-fit md:px-10 px-4 my-20">
+      <div className=" rounded-2xl w-full md:h-screen h-full flex gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
+        <div className="bg-[url(https://images.unsplash.com/photo-1608320066644-cfe4ae0e8fa7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTYyfHxjYXJ8ZW58MHwxfDB8fHww)] bg-cover bg-center hidden lg:flex flex-col items-start justify-between w-1/2 h-full rounded-2xl p-5">
           <span className="bg-white text-sm rounded-full px-4 py-2">
             Rent-Wheels
           </span>
@@ -47,11 +47,11 @@ const Login = () => {
             </h3>
           </div>
         </div>
-        <div className=" w-1/2  h-full flex items-center justify-center rounded-2xl ">
-          <div className="card w-4/5 h-full py-10 ">
+        <div className=" md:w-1/2 w-full h-full flex items-center justify-center rounded-2xl ">
+          <div className="card md:w-4/5 h-full py-10 ">
             <div className="w-fit mb-3">
               <FaStarOfLife
-                className="text-3xl text-[#ffe042] animate-spin duration-1000"
+                className="text-3xl text-[#A0BB70] animate-spin duration-1000"
                 style={{ animationDuration: "7s" }}
               />
             </div>

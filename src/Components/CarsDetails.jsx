@@ -145,14 +145,14 @@ const CarsDetails = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-start gap-5 px-10 mt-10 ">
+    <div className="w-full min-h-screen flex flex-col items-start gap-5 md:px-10 px-4 md:mt-10 mt-20 ">
       <div className="flex items-center gap-1 border-b border-zinc-100 w-full pb-3">
         <button onClick={()=>navigate(-1)} className="hover:bg-zinc-100 flex items-center gap-3 transition-all duration-300 px-4 py-2 rounded-full">
           <FaArrowLeft />Back
         </button>
       </div>
-      <div className="flex items-center justify-between gap-5">
-        <div className="w-3/5 relative bg-zinc-100 h-120 rounded-2xl overflow-hidden">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
+        <div className="lg:w-3/5 md:w-full w-full relative bg-zinc-100 lg:h-120  h-60 rounded-2xl overflow-hidden">
           <img src={image} className="w-full h-full object-cover" />
           <span
             className={`px-3 py-1 absolute rounded-full ${
@@ -164,7 +164,7 @@ const CarsDetails = () => {
             {status?.toLowerCase() === "available" ? "Available" : "Booked"}
           </span>
         </div>
-        <div className=" h-120 w-2/5 rounded-2xl pl-2">
+        <div className="h-120 lg:w-2/5 w-full rounded-2xl pl-2">
           <p className="px-4 py-1 w-fit rounded-full border border-zinc-400 font-medium text-xs mb-2">
             {category}
           </p>

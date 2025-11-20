@@ -12,7 +12,6 @@ const MyBookings = () => {
   const { user } = useContext(AuthContext);
   const axiosInstance = useAxios();
 
-  // Fetch bookings
   useEffect(() => {
     if (!user?.email) return;
     axiosInstance
@@ -20,7 +19,6 @@ const MyBookings = () => {
       .then((res) => setBookingCar(res.data));
   }, [user]);
 
-  // Delete booking handler
   const handleBookingDelete = async (id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
@@ -47,10 +45,8 @@ const MyBookings = () => {
 
           setBookingCar(bookingCar.filter((b) => b._id !== id));
 
-          // Show success Lottie animation
           setShowSuccess(true);
           setTimeout(() => setShowSuccess(false), 3000);
-
         } else {
           Swal.fire({
             icon: "error",
@@ -69,18 +65,14 @@ const MyBookings = () => {
   };
 
   return (
-    <div className="min-h-screen px-10 mt-20">
+    <div className="min-h-screen ms:px-10 px-4 mt-20">
       <h1 className="text-4xl border-b border-zinc-200 pb-4">
         My Bookings : {bookingCar.length}
       </h1>
 
       {bookingCar.length === 0 && !showSuccess ? (
         <div className="flex flex-col items-center justify-center mt-20">
-          <Lottie
-            animationData={emptyAnimation}
-            loop
-            className="w-72"
-          />
+          <Lottie animationData={emptyAnimation} loop className="w-72" />
           <p className="text-xl text-zinc-600 mt-4">
             You have no bookings yet.
           </p>
@@ -90,29 +82,49 @@ const MyBookings = () => {
           <table className="table w-full">
             <thead>
               <tr>
-                <th>Sl No.</th>
-                <th>Car name</th>
-                <th>Status</th>
-                <th>Provider Email</th>
-                <th>Location</th>
-                <th>Rent</th>
-                <th>Action</th>
+                <th className="hidden md:table-cell text-xs md:text-base">
+                  Sl No.
+                </th>
+                <th className="table-cell text-xs md:text-base">Car name</th>
+                <th className="table-cell text-xs md:text-base">Status</th>
+                <th className="hidden md:table-cell text-xs md:text-base">
+                  Provider Email
+                </th>
+                <th className="hidden md:table-cell text-xs md:text-base">
+                  Location
+                </th>
+                <th className="table-cell text-xs md:text-base">Rent</th>
+                <th className="table-cell text-xs md:text-base">Action</th>
               </tr>
             </thead>
             <tbody>
               {bookingCar.map((booking, index) => (
-                <tr key={booking._id}>
-                  <th>{index + 1}</th>
-                  <td>
-                    <div className="flex items-center gap-3 font-bold">
+                <tr key={booking._id} className="border-b border-zinc-200">
+                  <th className="hidden md:table-cell">{index + 1}</th>
+
+                  <td className="table-cell">
+                    <div className="flex items-center md:text-md text-xs gap-3 font-bold">
                       {booking.car_name}
                     </div>
                   </td>
-                  <td className="capitalize">{booking.status}</td>
-                  <td>{booking.provider_email}</td>
-                  <td>{booking.location}</td>
-                  <td>{booking.rent_price} tk</td>
-                  <td>
+
+                  <td className="table-cell capitalize md:text-md text-xs">
+                    {booking.status}
+                  </td>
+
+                  <td className="hidden md:table-cell text-sm md:text-md">
+                    {booking.provider_email}
+                  </td>
+
+                  <td className="hidden md:table-cell text-sm">
+                    {booking.location}
+                  </td>
+
+                  <td className="table-cell md:text-md text-xs">
+                    {booking.rent_price} tk
+                  </td>
+
+                  <td className="table-cell md:text-md text-xs">
                     <button
                       onClick={() => handleBookingDelete(booking._id)}
                       className="text-white text-xs px-4 py-1 capitalize font-normal rounded-full bg-red-500 btn-xs cursor-pointer"

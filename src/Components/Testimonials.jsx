@@ -22,16 +22,16 @@ const Testimonial = () => {
         <span></span>
       </div>
 
-      <div className="grid md:grid-cols-2 grid-cols-1 gap-10 mt-10">
+      <div className="grid md:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-10 md:gap-4 mt-10">
         {testimoni.map((item) => (
           <div
             key={item._id}
-            // data-aos="fade-up"
-            // data-aos-offset="200"
-            // data-aos-delay="50"
-            // data-aos-duration="500"
-            // data-aos-easing="ease-in-out"
-            className="flex gap-2 w-full h-[50vh] flex-col sm:flex-row"
+            data-aos="fade-up"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="500"
+            data-aos-easing="ease-in-out"
+            className="flex gap-2 w-full h-[50vh] md:h-[30vh] flex-col sm:flex-row"
           >
             <div className="bg-zinc-100 sm:w-[35%] w-full flex flex-col items-center justify-center h-[30vh] rounded-lg p-5">
               <div className="w-15 h-20  rounded-full overflow-hidden">
@@ -43,7 +43,7 @@ const Testimonial = () => {
               <p className="font-medium my-2">{item.name}</p>
               <p className="font-semibold text-xs">{item.role}</p>
             </div>
-            <div className="bg-zinc-100 sm:w-[65%] w-full h-[20vh] sm:h-full flex items-center justify-center p-5 rounded-lg">
+            <div className="bg-zinc-100 sm:w-[65%] w-full h-[20vh] sm:h-[30vh] flex items-center justify-center p-5 rounded-lg">
               <p className="sm:text-2xl text-sm font-medium opacity-80 tracking-tight">
                 "{item.review}"
               </p>

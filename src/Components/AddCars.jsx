@@ -66,7 +66,7 @@ const AddCars = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-zinc-100 py-10">
+    <div className="w-full min-h-screen flex items-center justify-center bg-zinc-100 px-4 md:px-0 py-20">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-4 w-150 px-5 py-10 rounded-3xl shadow-2xl bg-white border border-zinc-200"

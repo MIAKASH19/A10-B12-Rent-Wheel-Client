@@ -1,16 +1,30 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
 
   const handleSignOut = () => {
-    alert("User Signed Out");
-    signOutUser()
-      .then(() => {})
-      .catch();
-  };
+  signOutUser()
+    .then(() => {
+      Swal.fire({
+        title: "Signed Out!",
+        text: "You have been successfully signed out.",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    })
+    .catch((err) => {
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong while signing out.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    });
+};
 
   return (
     <div className="navbar fixed top-0 left-0 bg-base-100 sm:px-8 px-0 z-99 border-b border-zinc-300 ">
@@ -115,7 +129,7 @@ const Navbar = () => {
           )}
         </NavLink>
       </div>
-      <div className="navbar-end gap-4 text-zinc-800 hidden lg:flex">
+      <div className="navbar-end gap-4 text-zinc-800 lg:flex md:pr-0 pr-5">
         {user ? (
           <div className="dropdown dropdown-bottom dropdown-end">
             <div
@@ -135,7 +149,7 @@ const Navbar = () => {
               </p>
               <button
                 onClick={handleSignOut}
-                className="bg-[#A0BB70] text-white transition-all duration-300-2 rounded-3xl mt-3"
+                className="bg-[#A0BB70] text-white transition-all duration-300-2 rounded-3xl mt-3 py-2"
               >
                 Sign Out
               </button>
