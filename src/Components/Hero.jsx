@@ -59,9 +59,9 @@ const Hero = () => {
               src={slide.url}
               className="w-full h-full object-cover"
             />
-            <div className="absolute bg-rd-500 top-1/4 left-0 sm:w-1/2 w-full h-1/2 flex flex-col items-start sm:gap-5 gap-3 justify-center text-white sm:pl-10 px-4">
+            <div className="absolute bg-rd-500 top-1/4 left-0 sm:w-1/2 w-full h-1/2 flex flex-col items-start sm:gap-5 gap-3 justify-center overflow-hidden text-white sm:pl-10 px-4">
               <h1 className="sm:text-7xl text-3xl w-full font-semibold sm:font-normal sm:full z-2">{slide.title}</h1>
-              <div className="bg-black w-full h-full fixed top-0 left-0 opacity-20 z-1"></div>
+              <div className="bg-black w-full md:hidden block h-full fixed top-0 left-0 opacity-20 z-1"></div>
               <p className="hidden sm:block">
                 {slide.description}
               </p>

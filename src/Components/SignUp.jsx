@@ -88,17 +88,17 @@ const Register = () => {
 
   return (
     <div className="w-full md:min-h-screen h-fit md:px-10 px-4 my-20">
-      <div className=" rounded-2xl w-full md:h-screen lg:flex  gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
+      <div className=" rounded-2xl w-full md:h-screen h-full flex gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
         <div className="bg-[url(https://images.unsplash.com/photo-1618353482480-61ca5a9a7879?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGNhcnxlbnwwfDF8MHx8fDA%3D)] bg-cover bg-bottom hidden lg:flex flex-col items-start justify-between w-1/2 h-full rounded-2xl p-5">
           <span className="bg-white text-sm rounded-full px-4 py-2">
             Rent-Wheels
           </span>
-          <div className="text-white">
+          <div className="text-white ">
             <p className="text-xs ">You Can Easily</p>
             <h3 className="text-4xl w-4/5">
-              Get accrss your personal hub for clarity and productivity.
+              Get access your personal hub for clarity and productivity.
             </h3>
-          </div>md
+          </div>
         </div>
         <div className=" md:w-1/2 w-full h-full flex items-center justify-center rounded-2xl ">
           <div className="card md:w-4/5 w-full h-full pt-6 ">
@@ -163,33 +163,6 @@ const Register = () => {
                   onClick={handleGoogleSignIn}
                   className="btn btn-primary rounded-full mt-4"
                 >
-                  {/* <svg
-                    aria-label="Google logo"
-                    width="22"
-                    height="22"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                  >
-                    <g>
-                      <path d="m0 0H512V512H0" fill="#fff"></path>
-                      <path
-                        fill="#34a853"
-                        d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
-                      ></path>
-                      <path
-                        fill="#4285f4"
-                        d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
-                      ></path>
-                      <path
-                        fill="#fbbc02"
-                        d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
-                      ></path>
-                      <path
-                        fill="#ea4335"
-                        d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
-                      ></path>
-                    </g>
-                  </svg> */}
                   Sign In with Google
                 </button>
                 {error && <p className="text-red-500 text-xs">{error}</p>}

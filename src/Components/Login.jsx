@@ -19,7 +19,6 @@ const Login = () => {
         e.target.reset();
         setUser(result.user);
         navigate(`${location.state ? location.state : "/"}`);
-        // console.log(user);
       })
       .catch((error) => setError(error));
   };
@@ -42,7 +41,7 @@ const Login = () => {
           <div className="text-white">
             <p className="text-xs ">You Can Easily</p>
             <h3 className="text-4xl w-4/5">
-              Get accrss your personal hub for clarity and productivity.
+              Get access your personal hub for clarity and productivity.
             </h3>
           </div>
         </div>

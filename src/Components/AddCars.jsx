@@ -19,7 +19,7 @@ const AddCars = () => {
         name: form.name.value,
         email: form.provider_email.value,
       },
-      status: "Available",
+      status: "available",
       rent_price: form.rent_price.value,
       location: form.location.value,
       description: form.description.value,
