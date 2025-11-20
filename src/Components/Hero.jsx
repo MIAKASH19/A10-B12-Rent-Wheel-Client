@@ -60,14 +60,14 @@ const Hero = () => {
               className="w-full h-full object-cover"
             />
             <div className="absolute bg-rd-500 top-1/4 left-0 sm:w-1/2 w-full h-1/2 flex flex-col items-start sm:gap-5 gap-3 justify-center text-white sm:pl-10 px-4">
-              <h1 className="sm:text-7xl text-3xl w-full font-semibold sm:font-normal sm:full z-[2]">{slide.title}</h1>
-              <div className="bg-black w-full h-full fixed top-0 left-0 opacity-20 z-[1]"></div>
+              <h1 className="sm:text-7xl text-3xl w-full font-semibold sm:font-normal sm:full z-2">{slide.title}</h1>
+              <div className="bg-black w-full h-full fixed top-0 left-0 opacity-20 z-1"></div>
               <p className="hidden sm:block">
                 {slide.description}
               </p>
               <Link
                 to="/browse-cars"
-                className="bg-[#A0BB70] px-6 py-3 rounded-full text-sm sm:text-md font-bold sm:font-normal text-white transition-all duration-300 hover:bg-black z-[2]"
+                className="bg-[#A0BB70] px-6 py-3 rounded-full text-sm sm:text-md font-bold sm:font-normal text-white transition-all duration-300 hover:bg-black z-1"
               >
                 Browse Cars
               </Link>
@@ -82,4 +82,3 @@ const Hero = () => {
 
 export default Hero;
 
-// https://www.topgear.com/sites/default/files/2021/12/1%20Cadillac%20Escalade.jpg?w=892&h=502
