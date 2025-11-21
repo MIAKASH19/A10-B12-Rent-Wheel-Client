@@ -49,13 +49,13 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-xl border border-zinc-200"
           >
-            <Link className="my-3 mx-2" to='/'>Home</Link>
-            <Link className="my-3 mx-2" to='/browse-cars'>Browse Car</Link>
-            <Link className="my-3 mx-2" to='/add-car'>Add Car</Link>
-            <Link className="my-3 mx-2" to='/my-listings'>My Listings</Link>
-            <Link className="my-3 mx-2" to='/my-bookings'>My Bookings</Link>
+            <Link className="py-3 mx-5 border-b border-zinc-200" to='/'>Home</Link>
+            <Link className="py-3 mx-5 border-b border-zinc-200" to='/browse-cars'>Browse Car</Link>
+            <Link className="py-3 mx-5 border-b border-zinc-200" to='/add-car'>Add Car</Link>
+            <Link className="py-3 mx-5 border-b border-zinc-200" to='/my-listings'>My Listings</Link>
+            <Link className="py-3 mx-5 " to='/my-bookings'>My Bookings</Link>
           </ul>
         </div>
         <Link to="/" className="sm:text-xl text-sm">
@@ -141,7 +141,7 @@ const Navbar = () => {
             </div>
             <div
               tabIndex="-1"
-              className="dropdown-content menu bg-base-100 rounded-3xl z-1 w-52 p-4 shadow-sm"
+              className="dropdown-content menu bg-base-100 rounded-3xl z-1 w-52 p-4 shadow-xl border border-zinc-200"
             >
               <h1 className="opacity-80 mb-2 ">{user.displayName}</h1>
               <p className="border-b border-zinc-200 pb-2 text-xs">

@@ -16,7 +16,7 @@ const Featured = () => {
     axiosInstance.get("/featured-cars").then((res) => {
       setCards(res.data);
       setAllCards(res.data);
-      setLoading(true);
+      setLoading(false);
     });
   }, []);
 

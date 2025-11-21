@@ -10,6 +10,8 @@ const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const from = location.state?.from || location.state || "/";
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -18,7 +20,7 @@ const Login = () => {
       .then((result) => {
         e.target.reset();
         setUser(result.user);
-        navigate(`${location.state ? location.state : "/"}`);
+        navigate(from);
       })
       .catch((error) => setError(error));
   };
@@ -26,7 +28,7 @@ const Login = () => {
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then(() => {
-        navigate(location?.state || "/");
+        navigate(from);
       })
       .catch((error) => setError(error.message));
   };

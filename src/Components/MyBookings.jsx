@@ -9,15 +9,18 @@ import successAnimation from "../../public/Done.json";
 const MyBookings = () => {
   const [bookingCar, setBookingCar] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user , loading} = useContext(AuthContext);
   const axiosInstance = useAxios();
 
   useEffect(() => {
-    if (!user?.email) return;
+    if (loading) return;        
+    if (!user?.email) return;   
+
     axiosInstance
       .get(`/bookings?email=${user.email}`)
-      .then((res) => setBookingCar(res.data));
-  }, [user]);
+      .then((res) => setBookingCar(res.data))
+      .catch(() => {});
+  }, [loading, user]);
 
   const handleBookingDelete = async (id) => {
     const result = await Swal.fire({

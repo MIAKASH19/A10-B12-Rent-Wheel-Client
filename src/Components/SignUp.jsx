@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaEye } from "react-icons/fa";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 
 const Register = () => {
@@ -9,6 +9,7 @@ const Register = () => {
   const { createUser, updateUser, setUser, signInWithGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +46,7 @@ const Register = () => {
               .then((res) => res.json())
               .then((data) => {
                 setUser({ ...user, displayName: name, photoURL: photo });
-                navigate("/");
+                navigate(location?.state || "/");
               });
           })
           .catch((error) => {
@@ -149,7 +150,7 @@ const Register = () => {
                 </div>
                 <div className="mt-2">
                   Have An Account?{" "}
-                  <Link to="/login" className="text-blue-800 hover:underline">
+                  <Link to="/login" state={location?.state ? location.state : null} className="text-blue-800 hover:underline">
                     LogIn
                   </Link>
                 </div>

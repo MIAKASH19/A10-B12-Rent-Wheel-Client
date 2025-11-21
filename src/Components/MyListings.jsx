@@ -7,7 +7,7 @@ import emptyAnimation from "../../public/Empty State.json";
 import successAnimation from "../../public/Done.json";
 
 const MyListings = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const axiosInstance = useAxios();
   const [showSuccess, setShowSuccess] = useState(false);
   const [carList, setCarList] = useState([]);
@@ -15,13 +15,14 @@ const MyListings = () => {
   const updateModalRef = useRef(null);
 
   useEffect(() => {
+    if (loading) return;
     if (!user?.email) return;
 
     axiosInstance
       .get(`/cars?email=${user.email}`)
       .then((res) => setCarList(res.data))
       .catch((err) => console.error(err));
-  }, [user]);
+  }, [user, loading]);
 
   const handleUpdateButton = (listing) => {
     setSelectedListing(listing);
