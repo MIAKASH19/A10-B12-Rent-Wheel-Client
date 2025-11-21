@@ -62,7 +62,7 @@ const WhyRentWithUs = () => {
             data-aos-easing="ease-in-out"
             className="h-100  flex flex-col justify-between gap-3 "
           >
-            <div className="bg-red-500 relative w-full h-[80%] rounded-2xl overflow-hidden">
+            <div className="bg-zinc-100 relative w-full h-[80%] rounded-2xl overflow-hidden">
               <div className="w-14 h-14 bg-black text-white flex items-center justify-center rounded-full absolute top-3 left-3">
                 0{index + 1}
               </div>

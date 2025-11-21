@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
         <div className="flex flex-col sm:items-end items-start gap-1">
           <h1 className="opacity-70 text-xl mb-3">Office</h1>
-          <p className="text-3xl w-80 text-start">
+          <p className="text-3xl w-80 text-end">
             k/7 road, Rubir Mor, Noagaon, Bangladesh (+943-587-924)
           </p>
         </div>

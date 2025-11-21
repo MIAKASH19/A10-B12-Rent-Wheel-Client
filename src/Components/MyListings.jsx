@@ -309,7 +309,7 @@ const MyListings = () => {
                   <button
                     type="button"
                     onClick={handleCancelModalButton}
-                    className="bg-red-600 text-white w-full transition-all duration-300 py-2 rounded-3xl mt-3 cursor-pointer"
+                    className="bg-zinc-100 text-white w-full transition-all duration-300 py-2 rounded-3xl mt-3 cursor-pointer"
                   >
                     Cancel
                   </button>

@@ -205,7 +205,7 @@ const CarsDetails = () => {
             ) : (
               <button
                 onClick={() => handleCancleBook(id)}
-                className="bg-red-500 rounded-full text-sm text-white py-2 w-full"
+                className="bg-zinc-100 rounded-full text-sm text-white py-2 w-full"
               >
                 Cancle Booking
               </button>
