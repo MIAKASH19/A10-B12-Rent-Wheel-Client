@@ -38,11 +38,11 @@ const Footer = () => {
         </div>
         <div className="flex flex-col sm:items-end items-start gap-1">
           <h1 className="opacity-70 text-xl mb-3">Office</h1>
-          <p className="text-3xl w-80 text-end">
+          <p className="text-3xl w-80 md:text-end text-start">
             k/7 road, Rubir Mor, Noagaon, Bangladesh (+943-587-924)
           </p>
         </div>
-        <div className="sm:hidden flex  gap-5">
+        <div className="sm:hidden flex gap-4 text-sm mt-8">
           <Link
             to="https://www.youtube.com"
             className="uppercase cursor-pointer"

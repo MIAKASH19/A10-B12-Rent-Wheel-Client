@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AOS from "aos";
 import useAxios from "../hooks/useAxios";
+import Lottie from "lottie-react";
 import "aos/dist/aos.css";
+import { AuthContext } from "../Context/AuthContext";
+import emptyAnimation from "../../public/Empty State.json";
 AOS.init();
 
 const Testimonial = () => {
   const [testimoni, setTestimoni] = useState([]);
   const axiosInstance = useAxios();
+  const { loading, setLoading } = useContext(AuthContext);
 
   useEffect(() => {
+    setLoading(true);
     axiosInstance.get("/testimonials").then((res) => setTestimoni(res.data));
+    setLoading(false);
   }, []);
 
   return (
@@ -22,35 +28,46 @@ const Testimonial = () => {
         <span></span>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-10 md:gap-4 mt-10">
-        {testimoni.map((item) => (
-          <div
-            key={item._id}
-            data-aos="fade-up"
-            data-aos-offset="200"
-            data-aos-delay="50"
-            data-aos-duration="500"
-            data-aos-easing="ease-in-out"
-            className="flex gap-2 w-full h-[50vh] md:h-[30vh] flex-col sm:flex-row"
-          >
-            <div className="bg-zinc-100 sm:w-[35%] w-full flex flex-col items-center justify-center h-[30vh] rounded-lg p-5">
-              <div className="w-15 h-20  rounded-full overflow-hidden">
-                <img
-                  src={item.image}
-                  className="w-full h-full object-cover object-center"
-                />
+      {loading ? (
+        <div className="flex items-center justify-center h-[40vh] ">
+          <span className="loading loading-spinner text-success"></span>
+        </div>
+      ) : testimoni.length === 0 ? (
+        <div className="flex flex-col items-center justify-center my-10">
+          <Lottie animationData={emptyAnimation} loop className="w-72" />
+          <p className="text-xl text-zinc-600 mt-4">No Car Found Yet.</p>
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 grid-cols-1 gap-10 md:gap-4 mt-10">
+          {testimoni.map((item) => (
+            <div
+              key={item._id}
+              data-aos="fade-up"
+              data-aos-offset="200"
+              data-aos-delay="50"
+              data-aos-duration="500"
+              data-aos-easing="ease-in-out"
+              className="flex gap-2 w-full h-[50vh] md:h-[30vh] flex-col sm:flex-row"
+            >
+              <div className="bg-zinc-100 sm:w-[35%] w-full flex flex-col items-center justify-center h-[30vh] rounded-lg p-5">
+                <div className="w-15 h-20  rounded-full overflow-hidden">
+                  <img
+                    src={item.image}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+                <p className="font-medium my-2">{item.name}</p>
+                <p className="font-semibold text-xs">{item.role}</p>
               </div>
-              <p className="font-medium my-2">{item.name}</p>
-              <p className="font-semibold text-xs">{item.role}</p>
+              <div className="bg-zinc-100 sm:w-[65%] w-full h-[20vh] sm:h-[30vh] flex items-center justify-center p-5 rounded-lg">
+                <p className="sm:text-2xl text-sm font-medium opacity-80 tracking-tight">
+                  "{item.review}"
+                </p>
+              </div>
             </div>
-            <div className="bg-zinc-100 sm:w-[65%] w-full h-[20vh] sm:h-[30vh] flex items-center justify-center p-5 rounded-lg">
-              <p className="sm:text-2xl text-sm font-medium opacity-80 tracking-tight">
-                "{item.review}"
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

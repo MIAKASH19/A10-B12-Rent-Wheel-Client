@@ -50,17 +50,17 @@ const Hero = () => {
         }}
         navigation={false}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper sm:h-screen h-[25vh] overflow-hidden sm:mb-20 mb-10"
+        className="mySwiper md:h-screen sm:h-[70vh] h-[35vh] overflow-hidden sm:mb-20 mb-10"
       >
         {sliderData.map((slide, index) => (
           <SwiperSlide>
-            <div key={index} className="relative w-full sm:h-screen h-full  rounded-2xl overflow-hidden">
+            <div key={index} className="relative w-full sm:h-[70vh] md:h-screen h-full  rounded-2xl overflow-hidden">
             <img
               src={slide.url}
               className="w-full h-full object-cover"
             />
             <div className="absolute  top-1/4 left-0 sm:w-1/2 w-full h-1/2 flex flex-col items-start sm:gap-5 gap-3 justify-center overflow-hidden text-white sm:pl-10 px-4">
-              <h1 className="sm:text-7xl text-3xl w-full font-semibold sm:font-normal sm:full z-2">{slide.title}</h1>
+              <h1 className="md:text-7xl sm:text-3xl text-xl w-full font-semibold sm:font-normal z-2">{slide.title}</h1>
               <div className="bg-black w-full h-full fixed top-0 left-0 rounded-2xl opacity-20 z-1"></div>
               <p className="hidden sm:block">
                 {slide.description}
