@@ -43,7 +43,7 @@ const CarsDetails = () => {
       car_id: id,
     };
 
-    fetch("http://localhost:3000/bookings", {
+    fetch("https://rent-wheel-server-api.onrender.com/bookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -219,48 +219,4 @@ const CarsDetails = () => {
 
 export default CarsDetails;
 
-// const handleCancleBook = async () => {
-//   Swal.fire({
-//     title: "বুকিং বাতিল করবেন?",
-//     text: "এই গাড়িটি আবার available হয়ে যাবে!",
-//     icon: "warning",
-//     showCancelButton: true,
-//     confirmButtonColor: "#3085d6",
-//     cancelButtonColor: "#d33",
-//     confirmButtonText: "হ্যাঁ, Cancel করি!",
-//   }).then(async (result) => {
-//     if (result.isConfirmed) {
-//       // ১️⃣ প্রথমে এই user এর booking বের করি
-//       const bookingRes = await axiosInstance.get(
-//         `/bookings?email=${user.email}`
-//       );
-//       const userBooking = bookingRes.data.find((b) => b.car_id === id);
 
-//       if (!userBooking) {
-//         return Swal.fire(
-//           "Error!",
-//           "এই গাড়ির কোনো Booking পাওয়া যায়নি!",
-//           "error"
-//         );
-//       }
-
-//       const bookingId = userBooking._id;
-
-//       // ২️⃣ গাড়ির status আবার available করি
-//       const res = await axiosInstance.patch(`/cars/cancel/${id}`);
-
-//       if (res.data.modifiedCount > 0) {
-//         setCar((prev) => ({ ...prev, status: "available" }));
-
-//         // ৩️⃣ এখন booking ডাটা delete করি
-//         await axiosInstance.delete(`/bookings/${bookingId}`);
-
-//         Swal.fire(
-//           "Cancelled!",
-//           "Booking সফলভাবে বাতিল করা হয়েছে!",
-//           "success"
-//         );
-//       }
-//     }
-//   });
-// };

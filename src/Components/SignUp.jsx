@@ -37,7 +37,7 @@ const Register = () => {
               email: email,
               image: photo,
             };
-            fetch("http://localhost:3000/users", {
+            fetch("https://rent-wheel-server-api.onrender.com/users", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(updatedUser),
@@ -71,7 +71,7 @@ const Register = () => {
           image: user.photoURL,
         };
 
-        fetch("http://localhost:3000/users", {
+        fetch("https://rent-wheel-server-api.onrender.com/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

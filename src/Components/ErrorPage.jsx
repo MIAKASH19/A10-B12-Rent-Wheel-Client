@@ -20,7 +20,6 @@ const ErrorPage = () => {
         Oops! Page Not Found
       </h1>
 
-      {/* Back Home Button */}
       <button
         onClick={() => navigate("/")}
         className="bg-[#A0BB70] rounded-full text-sm text-white hover:bg-black transition-all duration-300 px-4 py-2 mt-5"

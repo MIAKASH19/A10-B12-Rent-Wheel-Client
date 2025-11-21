@@ -45,15 +45,15 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     const authInfo = {
-        createUser,
-        signInUser,
-        signInWithGoogle,
-        signOutUser,
-        updateUser,
-        user,
-        setUser,
-        loading, 
-            setLoading
+    createUser,
+    signInUser,
+    signInWithGoogle,
+    signOutUser,
+    updateUser,
+    user,
+    setUser,
+    loading, 
+    setLoading
     }
     return (
         <AuthContext.Provider value={authInfo}>

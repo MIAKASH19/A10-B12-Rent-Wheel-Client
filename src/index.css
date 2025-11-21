@@ -15,9 +15,5 @@
 .btn-primary {
   @apply text-white border-none;
   background: #A0BB70;
-  /* background: #ffe042; */
   color: rgb(29, 29, 29);
 }
-
-
-/* #A0BB70 ----Primary Color */

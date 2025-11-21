@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { MdArrowOutward } from "react-icons/md";
 import { AuthContext } from "../Context/AuthContext";
 
+
 const Footer = () => {
   const { user } = useContext(AuthContext);
   return (
@@ -41,8 +42,34 @@ const Footer = () => {
             k/7 road, Rubir Mor, Noagaon, Bangladesh (+943-587-924)
           </p>
         </div>
+        <div className="sm:hidden flex  gap-5">
+          <Link
+            to="https://www.youtube.com"
+            className="uppercase cursor-pointer"
+          >
+            Youtube
+          </Link>
+          <Link
+            to="https://www.facebook.com"
+            className="uppercase cursor-pointer"
+          >
+            Facebook
+          </Link>
+          <Link
+            to="https://www.instagram.com"
+            className="uppercase cursor-pointer"
+          >
+            Instagram
+          </Link>
+          <Link
+            to="https://www.linkedin.com"
+            className="uppercase cursor-pointer"
+          >
+            LinkedIn
+          </Link>
+        </div>
       </div>
-      <div className="  w-full h-fit ">
+      <div className="w-full h-fit mt-30 md:mt-0">
         <h1 className="text-[14vw] text-center bg-rd-500 leading-none mt-6  uppercase font-medium tracking-tight">
           Rent-Wheels
         </h1>
@@ -51,7 +78,7 @@ const Footer = () => {
         <p className="uppercase cursor-pointer sm:text-start text-center text-xs">
           Copyright © rent-wheels 2025
         </p>
-        <div className="hidden sm:block">
+        <div className="hidden sm:flex gap-5">
           <Link
             to="https://www.youtube.com"
             className="uppercase cursor-pointer"

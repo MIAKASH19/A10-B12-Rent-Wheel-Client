@@ -27,7 +27,7 @@ const AddCars = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/add-car", {
+      const res = await fetch("https://rent-wheel-server-api.onrender.com/add-car", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
