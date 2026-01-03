@@ -74,13 +74,17 @@ export const router = createBrowserRouter([
     element: <PrivateRoute><DashboardLayouts></DashboardLayouts></PrivateRoute>,
     children: [
       {
-        index: true,
+        path: "my-bookings",
         Component: MyBookings,
       },
       {
         path: "my-listings",
         Component: MyListings,
-      }
+      },
+      {
+        path: "add-car",
+        Component: AddCars,
+      },
     ]
   },
   {

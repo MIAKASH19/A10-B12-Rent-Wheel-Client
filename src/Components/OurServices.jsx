@@ -7,7 +7,7 @@ AOS.init();
 
 const OurServices = () => {
   return (
-    <div className=" w-full min-h-screen sm:px-10 px-5 py-20 pt-0 sm:pt-20 text-zinc-750">
+    <div className=" w-full min-h-screen sm:px-10 px-5 py-20 pt-0 sm:pt-20 bg-white dark:bg-zinc-900 text-zinc-750 dark:text-zinc-200">
       <div className="h-20 w-full flex items-center justify-between  border-b-2 border-b-zinc-200">
         <h3 className="text-4xl font-momo opacity-60">01</h3>
         <h2 className="text-4xl">Our Services</h2>

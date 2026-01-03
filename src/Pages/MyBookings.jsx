@@ -68,7 +68,7 @@ const MyBookings = () => {
   };
 
   return (
-    <div className="min-h-screen ms:px-10 px-4 mt-20">
+    <div className="min-h-screen ms:px-10 px-4 mt-10">
       <h1 className="text-4xl border-b border-zinc-200 pb-4">
         My Bookings : {bookingCar.length}
       </h1>

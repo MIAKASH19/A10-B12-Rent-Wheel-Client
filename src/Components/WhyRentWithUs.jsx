@@ -45,7 +45,7 @@ const whyRentData = [
 
 const WhyRentWithUs = () => {
   return (
-    <div className=" w-full h-fit px-10 py-20 pb-10 sm:pb-20 text-zinc-750">
+    <div className=" w-full h-fit px-10 py-20 pb-10 sm:pb-20 bg-white dark:bg-zinc-900 text-zinc-750 dark:text-zinc-200">
       <div className="h-20 w-full flex items-center justify-between  border-b-2 border-b-zinc-200">
         <h3 className="sm:text-4xl text-3xl font-momo opacity-60">03</h3>
         <h2 className="sm:text-4xl text-3xl">Why Rent With Us</h2>
@@ -69,7 +69,7 @@ const WhyRentWithUs = () => {
               <img src={item.image} className="w-full h-full object-center" />
             </div>
             <div className="h-[20%] ">
-              <h1 className="flex gap-2 font-medium text-zinc-700 items-center">
+              <h1 className="flex gap-2 font-medium text-zinc-700 dark:text-zinc-400 items-center">
                 {" "}
                 <span className="w-3 h-3 rounded-full bg-black"></span>
                 {item.category}

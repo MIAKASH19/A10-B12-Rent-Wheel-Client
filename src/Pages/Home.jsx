@@ -4,6 +4,7 @@ import Featured from "../Components/Featured"
 import WhyRentWithUs from "../Components/WhyRentWithUs"
 import Testimonials from "../Components/Testimonials"
 import Hero from "../Components/Hero"
+import FAQ from "../Components/FAQ";
 
 const Home = () => {
   return (
@@ -22,6 +23,7 @@ const Home = () => {
       <Featured></Featured>
       <WhyRentWithUs></WhyRentWithUs>
       <Testimonials></Testimonials>
+      <FAQ></FAQ>
     </div>
   );
 };

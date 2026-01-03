@@ -1,47 +1,52 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router'
+import { Link, NavLink, Outlet } from 'react-router'
 import { ThemeContext } from '../Context/ThemeContext'
 import ThemeToggle from '../Components/ThemeToggle'
 import { AuthContext } from '../Context/AuthContext'
 import { LuLayoutDashboard } from 'react-icons/lu'
+import Swal from 'sweetalert2'
+import { MdAddCircleOutline, MdOutlineRateReview } from 'react-icons/md'
+import { CalendarCheck } from 'lucide-react'
+import { FaHome, FaRegListAlt } from 'react-icons/fa'
+import { GoGear } from 'react-icons/go'
 
 const DashboardLayouts = () => {
     const { dark } = useContext(ThemeContext)
-    const {user, signOutUser} = useContext(AuthContext)
+    const { user, signOutUser } = useContext(AuthContext)
 
     const handleSignOut = () => {
         signOutUser()
-          .then(() => {
-            Swal.fire({
-              title: "Signed Out!",
-              text: "You have been successfully signed out.",
-              icon: "success",
-              confirmButtonText: "OK",
+            .then(() => {
+                Swal.fire({
+                    title: "Signed Out!",
+                    text: "You have been successfully signed out.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                });
+            })
+            .catch((err) => {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Something went wrong while signing out.",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                });
             });
-          })
-          .catch((err) => {
-            Swal.fire({
-              title: "Error!",
-              text: "Something went wrong while signing out.",
-              icon: "error",
-              confirmButtonText: "OK",
-            });
-          });
-      };
+    };
 
     return (
-        <div>
-            <div className="drawer lg:drawer-open">
+        <div className='font-inter'>
+            <div className="drawer lg:drawer-open ">
                 <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
                     {/* Navbar */}
-                    <nav className="navbar w-full bg-base-300">
-                        <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost">
+                    <nav className="navbar w-full bg-base-300 dark:bg-zinc-900 z-99">
+                        <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost dark:hover:bg-zinc-500 rounded-xl">
                             {/* Sidebar toggle icon */}
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block dark:text-white text-zinc-900  size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
                         </label>
-                        <div className="px-4">
-                            <div className="navbar-start">
+                        <div className="navbar">
+                            <div className="navbar-start dark:text-white text-zinc-900">
                                 <Link to="/" className="sm:text-xl text-sm flex items-center gap-2 font-semibold">
                                     {dark ? (
                                         <img src="/dark-theme-logo.png" alt="Logo" className="w-fit h-10 object-contain" />
@@ -94,32 +99,115 @@ const DashboardLayouts = () => {
 
                     </nav>
                     {/* Page content here */}
-                    <div className="p-4">Page Content</div>
+                    <Outlet></Outlet>
                 </div>
 
-                <div className="drawer-side is-drawer-close:overflow-visible">
-                    <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-                        {/* Sidebar content here */}
-                        <ul className="menu w-full grow">
-                            {/* List item */}
+                <div className="drawer-side overflow-visible">
+                    <label
+                        htmlFor="my-drawer-4"
+                        aria-label="close sidebar"
+                        className="drawer-overlay"
+                    ></label>
+
+                    <div className="flex min-h-full flex-col items-center bg-neutral-100 dark:bg-zinc-900 is-drawer-close:w-20 is-drawer-open:w-56 transition-all duration-300 shadow-lg">
+                        {/* Sidebar Logo */}
+                        <div className="flex items-center justify-center w-full py-6">
+                            <h1 className="text-xl font-bold text-[#9fcc51] hidden is-drawer-close:block">
+                                RW
+                            </h1>
+                            <h1 className="text-2xl font-bold text-[#9fcc51] is-drawer-close:hidden">
+                                Rent-Wheels
+                            </h1>
+                        </div>
+
+                        {/* Menu */}
+                        <ul className="menu w-full grow flex flex-col items-center gap-4 px-2">
+                            {/* Home */}
                             <li>
-                                <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-                                    {/* Home icon */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                                    <span className="is-drawer-close:hidden">Homepage</span>
-                                </button>
+                                <NavLink
+                                    to="/"
+                                    className={({ isActive }) =>
+                                        `flex items-center gap-3 px-4 py-2 w-full rounded-full transition-all duration-300
+                ${isActive
+                                            ? "bg-[#9fcc51] text-white shadow-lg"
+                                            : "text-gray-700 hover:bg-[#9fcc51]/30 hover:text-white"
+                                        }`
+                                    }
+                                    data-tip="Homepage"
+                                >
+                                    <FaHome size={20} className="min-w-5" />
+                                    <span className="is-drawer-close:hidden font-medium">
+                                        Homepage
+                                    </span>
+                                </NavLink>
                             </li>
 
-                            {/* List item */}
+                            {/* My Bookings */}
                             <li>
-                                <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
-                                    {/* Settings icon */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
-                                    <span className="is-drawer-close:hidden">Settings</span>
-                                </button>
+                                <NavLink
+                                    to="/dashboard/my-bookings"
+                                    className={({ isActive }) =>
+                                        `flex items-center gap-3 px-4 py-2 w-full rounded-full transition-all duration-300
+                ${isActive
+                                            ? "bg-[#9fcc51] text-white shadow-lg"
+                                            : "text-gray-700 hover:bg-[#9fcc51]/30 hover:text-white"
+                                        }`
+                                    }
+                                    data-tip="My Bookings"
+                                >
+                                    <CalendarCheck size={20} className="min-w-5" />
+                                    <span className="is-drawer-close:hidden font-medium">
+                                        My Bookings
+                                    </span>
+                                </NavLink>
+                            </li>
+
+                            {/* My Listings */}
+                            <li>
+                                <NavLink
+                                    to="/dashboard/my-listings"
+                                    className={({ isActive }) =>
+                                        `flex items-center gap-3 px-4 py-2 w-full rounded-full transition-all duration-300
+                ${isActive
+                                            ? "bg-[#9fcc51] text-white shadow-lg"
+                                            : "text-gray-700 hover:bg-[#9fcc51]/30 hover:text-white"
+                                        }`
+                                    }
+                                    data-tip="My Listings"
+                                >
+                                    <FaRegListAlt size={20} className="min-w-5" />
+                                    <span className="is-drawer-close:hidden font-medium">
+                                        My Listings
+                                    </span>
+                                </NavLink>
+                            </li>
+                            {/* Add Car */}
+                            <li>
+                                <NavLink
+                                    to="/dashboard/add-car"
+                                    className={({ isActive }) =>
+                                        `flex items-center gap-3 px-4 py-2 w-full rounded-full transition-all duration-300
+                ${isActive
+                                            ? "bg-[#9fcc51] text-white shadow-lg"
+                                            : "text-gray-700 hover:bg-[#9fcc51]/30 hover:text-white"
+                                        }`
+                                    }
+                                    data-tip="Add Car"
+                                >
+                                    <MdAddCircleOutline size={20} className="min-w-[20px]" />
+                                    <span className="is-drawer-close:hidden font-medium">
+                                        Add Car
+                                    </span>
+                                </NavLink>
                             </li>
                         </ul>
+
+                        {/* Bottom Info / Logout */}
+                        <div className="mb-6 mt-auto w-full px-4">
+                            <button className="w-full py-2 px-4 rounded-full bg-[#9fcc51] text-white font-medium hover:bg-[#A0BB70] transition-all duration-300 shadow-lg">
+                                <GoGear />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

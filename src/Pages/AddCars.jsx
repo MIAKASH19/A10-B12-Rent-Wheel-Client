@@ -66,10 +66,15 @@ const AddCars = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-zinc-100 px-4 md:px-0 py-20">
+    <div className="relative w-full min-h-screen flex items-center justify-center bg-zinc-100 px-4 md:px-0 py-20">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#9fcc51] dark:bg-[#9fcc51]/30 rounded-full blur-[140px]" />
+        <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-[#9fcc51] dark:bg-[#9fcc51]/30 rounded-full blur-[160px]" />
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-[#9fcc51] dark:bg-[#9fcc51]/30 rounded-full blur-[160px]" />
+      </div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center gap-4 w-150 px-5 py-10 rounded-3xl shadow-2xl bg-white border border-zinc-200"
+        className="flex flex-col items-center gap-4 w-5xl px-5 py-10 rounded-3xl shadow-2xl bg-white  border border-zinc-200 z-99"
       >
         <h1 className="text-5xl font-medium">Add all fields</h1>
         <div className="flex items-center gap-5 w-full justify-between">
@@ -79,7 +84,7 @@ const AddCars = () => {
             </label>
             <input
               type="text"
-              className="input w-full rounded-full"
+              className="input w-full  rounded-full"
               name="car_name"
               placeholder="Car name"
             />
@@ -185,7 +190,7 @@ const AddCars = () => {
           cols="40"
           rows="5"
         ></textarea>
-        <button className="bg-black text-white w-full transition-all duration-300  py-2 rounded-3xl mt-3 cursor-pointer">
+        <button className="bg-[#9fcc51] text-white w-full transition-all duration-300  py-2 rounded-3xl mt-3 cursor-pointer">
           Add
         </button>
       </form>
