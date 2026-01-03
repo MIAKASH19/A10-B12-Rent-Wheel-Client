@@ -1,9 +1,9 @@
 import React from "react";
-import Featured from "./Featured";
-import Hero from "./Hero";
-import Services from "./Services";
-import WhyRentWithUs from "./WhyRentWithUs";
-import Testimonials from "./Testimonials";
+import OurServices from "../Components/OurServices"
+import Featured from "../Components/Featured"
+import WhyRentWithUs from "../Components/WhyRentWithUs"
+import Testimonials from "../Components/Testimonials"
+import Hero from "../Components/Hero"
 
 const Home = () => {
   return (
@@ -18,7 +18,7 @@ const Home = () => {
           style, every time.
         </p>
       </div>
-      <Services></Services>
+      <OurServices></OurServices>
       <Featured></Featured>
       <WhyRentWithUs></WhyRentWithUs>
       <Testimonials></Testimonials>

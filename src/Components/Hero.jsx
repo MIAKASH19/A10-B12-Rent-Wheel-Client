@@ -1,5 +1,3 @@
-import React from "react";
-import heroImg from "../../public/cars2.jpg";
 import { Link } from "react-router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -36,7 +34,7 @@ const sliderData = [
 
 const Hero = () => {
   return (
-    <div className=" w-full sm:min-h-screen h-fit sm:px-8 px-4 pt-20 ">
+    <div className=" w-full sm:min-h-screen bg-white dark:bg-zinc-900 h-fit sm:px-8 px-4 pt-20 pb-3">
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -67,7 +65,7 @@ const Hero = () => {
               </p>
               <Link
                 to="/browse-cars"
-                className="bg-[#A0BB70] px-6 py-3 rounded-full text-sm sm:text-md font-bold sm:font-normal text-white transition-all duration-300 hover:bg-black z-1"
+                className="bg-[#9fcc51] px-6 py-3 rounded-full text-sm sm:text-md font-bold sm:font-normal text-white transition-all duration-300 hover:bg-black z-1"
               >
                 Browse Cars
               </Link>

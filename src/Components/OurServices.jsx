@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init();
 
-const Services = () => {
+const OurServices = () => {
   return (
     <div className=" w-full min-h-screen sm:px-10 px-5 py-20 pt-0 sm:pt-20 text-zinc-750">
       <div className="h-20 w-full flex items-center justify-between  border-b-2 border-b-zinc-200">
@@ -54,14 +54,14 @@ const Services = () => {
           punctual arrival every time.
         </p>
         <Link
-          to="/browse-cars"
-          className="bg-[#A0BB70] px-6 py-3 rounded-full text-white transition-all duration-300 hover:bg-black hover:text-white"
+          to="/services"
+          className="bg-[#9fcc51] px-6 py-3 rounded-full text-white transition-all duration-300 hover:bg-black hover:text-white"
         >
-          Browse Cars
+          Services Overview
         </Link>
       </div>
     </div>
   );
 };
 
-export default Services;
+export default OurServices;

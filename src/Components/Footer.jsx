@@ -12,7 +12,7 @@ const Footer = () => {
         <p className="w-40">Uncover the Potency of Rent-Wheels</p>
         <div className="flex justify-between border-b border-zinc-700 pb-6">
           <h1 className="sm:text-7xl text-4xl  w-fit">info@rent-wheels.com</h1>
-          <button className="sm:text-2xl text-xs bg-[#A0BB70] px-7 sm:py-2 py-0 flex items-center gap-3 rounded-full text-white">
+          <button className="sm:text-2xl text-xs bg-[#9fcc51] px-7 sm:py-2 py-0 flex items-center gap-3 rounded-full text-white">
             <span className="hidden sm:block">Contact Us</span>{" "}
             <MdArrowOutward className="sm:text-3xl text-2xl "></MdArrowOutward>
           </button>
@@ -21,17 +21,23 @@ const Footer = () => {
       <div className="flex flex-col sm:flex-row gap-5 sm:gap-0 sm:justify-between sm:items-center h-[40vh] mt-4 sm:px-10 px-4">
         <div className="flex flex-col gap-1">
           <h1 className="opacity-70 text-sm mb-3">Navigation</h1>
-          <Link to="/" className="text-3xl font-medium">
+          <Link to="/" className="text-2xl font-medium">
             Home
           </Link>
-          <Link to="/browse-cars" className="text-3xl font-medium">
+          <Link to="/browse-cars" className="text-2xl font-medium">
             Browse Car
           </Link>
-          <Link to="/add-car" className="text-3xl font-medium">
-            Add Car
+          <Link to="/services" className="text-2xl font-medium">
+            Services
+          </Link>
+          <Link to="/about-us" className="text-2xl font-medium">
+            About Us
+          </Link>
+          <Link to="/contact-us" className="text-2xl font-medium">
+            Contact us
           </Link>
           {user && (
-            <Link to="/my-listings" className="text-3xl font-medium">
+            <Link to="/my-listings" className="text-2xl font-medium">
               My Listings
             </Link>
           )}
@@ -74,7 +80,7 @@ const Footer = () => {
           Rent-Wheels
         </h1>
       </div>
-      <div className="sm:h-[12vh] h-[8vh] w-full text-black text-sm font-medium flex items-center sm:justify-between justify-center bg-[#A0BB70] px-10 mt-5">
+      <div className="sm:h-[12vh] h-[8vh] w-full text-black text-sm font-medium flex items-center sm:justify-between justify-center bg-[#9fcc51] px-10 mt-5">
         <p className="uppercase cursor-pointer sm:text-start text-center text-xs">
           Copyright © rent-wheels 2025
         </p>

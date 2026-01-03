@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios";
-import CarCard from "./CarCard";
+import CarCard from "../Components/CarCard";
 import { AuthContext } from "../Context/AuthContext";
 import Lottie from "lottie-react";
 import emptyAnimation from "../../public/Empty State.json";

@@ -1,15 +1,21 @@
 import { createBrowserRouter } from "react-router";
 import HomeLayouts from "../Layouts/RootLayout";
-import CarsDetails from "../Components/CarsDetails";
-import Home from "../Components/Home";
-import SignUp from "../Components/SignUp";
-import Login from "../Components/Login";
-import BrowseCars from "../Components/BrowseCars";
-import AddCars from "../Components/AddCars";
-import MyBookings from "../Components/MyBookings";
+import CarsDetails from "../Pages/CarsDetails";
+import Home from "../Pages/Home";
+import SignUp from "../Pages/SignUp";
+import Login from "../Pages/Login";
+import BrowseCars from "../Pages/BrowseCars";
+import AddCars from "../Pages/AddCars";
+import MyBookings from "../Pages/MyBookings";
 import PrivateRoute from "./PrivateRoute";
-import MyListings from "../Components/MyListings";
-import ErrorPage from "../Components/ErrorPage";
+import MyListings from "../Pages/MyListings";
+import ErrorPage from "../Pages/ErrorPage";
+import AboutUs from "../Pages/AboutUs";
+import Services from "../Pages/Services";
+import ServiceDetails from "../Pages/ServiceDetails";
+import ContactUs from './../Pages/ContactUs';
+import DashboardLayouts from "../Layouts/DashboardLayouts";
+import Privacy from "../Pages/Privacy";
 
 export const router = createBrowserRouter([
   {
@@ -33,28 +39,24 @@ export const router = createBrowserRouter([
         Component: BrowseCars,
       },
       {
-        path: "/add-car",
-        element: (
-          <PrivateRoute>
-            <AddCars></AddCars>
-          </PrivateRoute>
-        ),
+        path: "/services",
+        Component: Services,
       },
       {
-        path: "/my-listings",
-        element: (
-          <PrivateRoute>
-            <MyListings></MyListings>
-          </PrivateRoute>
-        ),
+        path: "/services/:id",
+        Component: ServiceDetails,
       },
       {
-        path: "/my-bookings",
-        element: (
-          <PrivateRoute>
-            <MyBookings></MyBookings>
-          </PrivateRoute>
-        ),
+        path: "/about-us",
+        Component: AboutUs,
+      },
+      {
+        path: "/contact-us",
+        Component: ContactUs,
+      },
+      {
+        path: "/privacy",
+        Component: Privacy,
       },
       {
         path: "/cars-details/:id",
@@ -65,6 +67,21 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+
+    path: "/dashboard",
+    element: <PrivateRoute><DashboardLayouts></DashboardLayouts></PrivateRoute>,
+    children: [
+      {
+        index: true,
+        Component: MyBookings,
+      },
+      {
+        path: "my-listings",
+        Component: MyListings,
+      }
+    ]
   },
   {
     path: "*",

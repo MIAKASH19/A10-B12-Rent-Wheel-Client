@@ -74,7 +74,7 @@ const Featured = () => {
           <p className="text-xl text-zinc-600 mt-4">No Car Found Yet.</p>
         </div>
       ) : (
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 place-items-center gap-5 my-10 mb-20">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 place-items-center gap-5 my-10 mb-20">
           {cards.map((car) => <CarCard key={car._id} car={car} />)}
         </div>
       )}
