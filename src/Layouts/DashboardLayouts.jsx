@@ -5,8 +5,8 @@ import ThemeToggle from '../Components/ThemeToggle'
 import { AuthContext } from '../Context/AuthContext'
 import { LuLayoutDashboard } from 'react-icons/lu'
 import Swal from 'sweetalert2'
-import { MdAddCircleOutline, MdOutlineRateReview } from 'react-icons/md'
-import { CalendarCheck } from 'lucide-react'
+import { MdAddCircleOutline } from 'react-icons/md'
+import { CalendarCheck, CircleUserRound } from 'lucide-react'
 import { FaHome, FaRegListAlt } from 'react-icons/fa'
 import { GoGear } from 'react-icons/go'
 
@@ -197,6 +197,24 @@ const DashboardLayouts = () => {
                                     <MdAddCircleOutline size={20} className="min-w-[20px]" />
                                     <span className="is-drawer-close:hidden font-medium">
                                         Add Car
+                                    </span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/profile"
+                                    className={({ isActive }) =>
+                                        `flex items-center gap-3 px-4 py-2 w-full rounded-full transition-all duration-300
+                ${isActive
+                                            ? "bg-[#9fcc51] text-white shadow-lg"
+                                            : "text-gray-700 hover:bg-[#9fcc51]/30 hover:text-white"
+                                        }`
+                                    }
+                                    data-tip="Profile"
+                                >
+                                    <CircleUserRound size={20} className="min-w-5"/>
+                                    <span className="is-drawer-close:hidden font-medium">
+                                        Profile
                                     </span>
                                 </NavLink>
                             </li>

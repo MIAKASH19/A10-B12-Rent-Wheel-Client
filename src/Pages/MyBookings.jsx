@@ -9,12 +9,12 @@ import successAnimation from "../../public/Done.json";
 const MyBookings = () => {
   const [bookingCar, setBookingCar] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
-  const { user , loading} = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const axiosInstance = useAxios();
 
   useEffect(() => {
-    if (loading) return;        
-    if (!user?.email) return;   
+    if (loading) return;
+    if (!user?.email) return;
 
     axiosInstance
       .get(`/bookings?email=${user.email}`)
@@ -68,41 +68,39 @@ const MyBookings = () => {
   };
 
   return (
-    <div className="min-h-screen ms:px-10 px-4 mt-10">
-      <h1 className="text-4xl border-b border-zinc-200 pb-4">
+    <div className="min-h-screen md:px-10 px-4 pt-5 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+      <h1 className="text-4xl border-b border-zinc-200 dark:border-zinc-700 pb-4">
         My Bookings : {bookingCar.length}
       </h1>
 
+      {/* No Bookings */}
       {bookingCar.length === 0 && !showSuccess ? (
         <div className="flex flex-col items-center justify-center mt-20">
           <Lottie animationData={emptyAnimation} loop className="w-72" />
-          <p className="text-xl text-zinc-600 mt-4">
+          <p className="text-xl text-zinc-600 dark:text-zinc-300 mt-4">
             You have no bookings yet.
           </p>
         </div>
       ) : (
         <div className="overflow-x-auto mt-6">
-          <table className="table w-full">
+          <table className="table w-full border-separate border-spacing-0 dark:bg-zinc-800 rounded-xl shadow-md">
             <thead>
-              <tr>
-                <th className="hidden md:table-cell text-xs md:text-base">
-                  Sl No.
-                </th>
+              <tr className="bg-zinc-100 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100">
+                <th className="hidden md:table-cell text-xs md:text-base">Sl No.</th>
                 <th className="table-cell text-xs md:text-base">Car name</th>
                 <th className="table-cell text-xs md:text-base">Status</th>
-                <th className="hidden md:table-cell text-xs md:text-base">
-                  Provider Email
-                </th>
-                <th className="hidden md:table-cell text-xs md:text-base">
-                  Location
-                </th>
+                <th className="hidden md:table-cell text-xs md:text-base">Provider Email</th>
+                <th className="hidden md:table-cell text-xs md:text-base">Location</th>
                 <th className="table-cell text-xs md:text-base">Rent</th>
                 <th className="table-cell text-xs md:text-base">Action</th>
               </tr>
             </thead>
             <tbody>
               {bookingCar.map((booking, index) => (
-                <tr key={booking._id} className="border-b border-zinc-200">
+                <tr
+                  key={booking._id}
+                  className="border-b border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                >
                   <th className="hidden md:table-cell">{index + 1}</th>
 
                   <td className="table-cell">
@@ -130,7 +128,7 @@ const MyBookings = () => {
                   <td className="table-cell md:text-md text-xs">
                     <button
                       onClick={() => handleBookingDelete(booking._id)}
-                      className="text-white text-xs px-4 py-1 capitalize font-normal rounded-full bg-red-500 btn-xs cursor-pointer"
+                      className="text-white text-xs px-4 py-1 capitalize font-normal rounded-full bg-red-500 hover:bg-red-600 transition-colors"
                     >
                       Delete
                     </button>
@@ -141,13 +139,11 @@ const MyBookings = () => {
           </table>
         </div>
       )}
+
+      {/* Success Lottie */}
       {showSuccess && (
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <Lottie
-            animationData={successAnimation}
-            loop={false}
-            className="w-52"
-          />
+        <div className="fixed inset-0 bg-black/30 dark:bg-black/50 flex items-center justify-center z-50">
+          <Lottie animationData={successAnimation} loop={false} className="w-52" />
         </div>
       )}
     </div>

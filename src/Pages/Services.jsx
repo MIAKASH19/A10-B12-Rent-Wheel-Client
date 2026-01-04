@@ -29,12 +29,14 @@ const Services = () => {
           <IoArrowDownSharp fontSize={20} />
         </div>
       </div>
-      <div className=' gap-y-5 justify-between'>
+      <div className=' relative gap-y-5 justify-between'>
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#9fcc51] dark:bg-[#9fcc51]/20 blur-[120px] rounded-full"></div>
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#9fcc51] dark:bg-[#9fcc51]/20 blur-[120px] rounded-full"></div>
         {services.map((service, index) => (
           <div
 
             key={index}
-            className="group flex flex-col md:flex-row w-full rounded-xl overflow-hidden shadow-md border border-zinc-300 mb-8 transition-transform duration-500 p-6"
+            className="group relative bg-white/25 backdrop-blur-xl flex flex-col md:flex-row w-full rounded-xl overflow-hidden shadow-md border border-zinc-300 mb-8 transition-transform duration-500 p-6"
           >
             {/* Image Section */}
             <div

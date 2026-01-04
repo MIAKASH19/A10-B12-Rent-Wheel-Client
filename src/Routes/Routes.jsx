@@ -16,6 +16,7 @@ import ServiceDetails from "../Pages/ServiceDetails";
 import ContactUs from './../Pages/ContactUs';
 import DashboardLayouts from "../Layouts/DashboardLayouts";
 import Privacy from "../Pages/Privacy";
+import Profile from "../Pages/Profile"
 
 export const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
       {
         path: "add-car",
         Component: AddCars,
+      },
+      {
+        path: "profile",
+        Component: Profile,
       },
     ]
   },

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { FaEye, FaStarOfLife } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const [error, setError] = useState(null);
@@ -32,6 +33,19 @@ const Login = () => {
       })
       .catch((error) => setError(error.message));
   };
+
+  const handleQuickLogin = () => {
+  const testEmail = "testuser@example.com"; 
+  const testPassword = "Test@123@user"; 
+
+  signInUser(testEmail, testPassword)
+    .then((result) => {
+      setUser(result.user);
+      navigate(from); 
+    })
+    .catch((error) => setError(error.message));
+};
+
 
   return (
     <div className="w-full md:min-h-screen h-fit md:px-10 px-4 my-20">
@@ -94,16 +108,24 @@ const Login = () => {
                 </div>
                 <button
                   type="submit"
-                  className="btn btn-neutral rounded-full mt-2"
+                  className="btn btn-neutral text-white rounded-full mt-2"
                 >
                   Log In
                 </button>
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
-                  className="btn btn-primary rounded-full mt-4"
+                  className="btn bg-[#9fcc51] flex items-center gap-1 rounded-full mt-4"
                 >
+                  <FcGoogle></FcGoogle>
                   Log In With Google
+                </button>
+                <button
+                  type="button"
+                  onClick={handleQuickLogin}
+                  className="btn bg-blue-500 text-white rounded-full mt-4"
+                >
+                  Quick Login (Test User)
                 </button>
               </fieldset>
             </form>

@@ -22,14 +22,14 @@ const OurServices = () => {
         data-aos-easing="ease-in-out"
       >
         <div className='relative group sm:w-100 w-90 h-70 overflow-hidden shadow-2xl rounded-3xl px-5 py-7 bg-[url("https://img.freepik.com/free-photo/happy-couple-car-showroom-dealership_23-2149117139.jpg?semt=ais_hybrid&w=740&q=80")] bg-cover'>
-          <span className="bg-white group-hover:bg-black group-hover:text-white transition-all duration-300 rounded-full py-3 px-5 text-sm">
+          <span className="bg-white group-hover:bg-black group-hover:text-white text-black transition-all duration-300 rounded-full py-3 px-5 text-sm">
             Long Term Rentals
           </span>
-          <span className="bg-white group-hover:bg-black group-hover:text-white transition-all duration-300 absolute right-5 bottom-3 rounded-full p-3 text-2xl">
+          <span className="bg-white text-black group-hover:bg-black group-hover:text-white transition-all duration-300 absolute right-5 bottom-3 rounded-full p-3 text-2xl">
             <PiArrowUpRightBold />
           </span>
         </div>
-        <div className='relative group sm:w-100 w-90 h-70 overflow-hidden shadow-2xl rounded-3xl px-5 py-7 bg-[url("https://img.freepik.com/free-photo/young-couple-choosing-car-car-showroom_1303-22834.jpg?semt=ais_hybrid&w=740&q=80")] bg-cover'>
+        <div className='relative group sm:w-100 w-90 h-70 text-black overflow-hidden shadow-2xl rounded-3xl px-5 py-7 bg-[url("https://img.freepik.com/free-photo/young-couple-choosing-car-car-showroom_1303-22834.jpg?semt=ais_hybrid&w=740&q=80")] bg-cover'>
           <span className="bg-white absolute left-5 bottom-5 rounded-full py-3 px-5 text-sm group-hover:bg-black group-hover:text-white transition-all duration-300">
             Luxury Car Rent
           </span>
@@ -37,7 +37,7 @@ const OurServices = () => {
             <PiArrowUpRightBold />
           </span>
         </div>
-        <div className='relative group sm:w-100 w-90 h-70 overflow-hidden shadow-2xl rounded-3xl px-5 py-7 bg-[url("https://img.freepik.com/free-photo/young-woman-testing-car-from-car-showroom_1303-17398.jpg?semt=ais_hybrid&w=740&q=80")] bg-cover'>
+        <div className='relative group sm:w-100 w-90 h-70 text-black overflow-hidden shadow-2xl rounded-3xl px-5 py-7 bg-[url("https://img.freepik.com/free-photo/young-woman-testing-car-from-car-showroom_1303-17398.jpg?semt=ais_hybrid&w=740&q=80")] bg-cover'>
           <span className="bg-white group-hover:bg-black group-hover:text-white transition-all duration-300 rounded-full py-3 px-5 text-sm">
             Self Drive Options
           </span>

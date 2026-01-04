@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
-  const { createUser, updateUser, setUser, signInWithGoogle } =
+  const { createUser, updateUser, setUser,signInUser, signInWithGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation()
@@ -87,6 +88,18 @@ const Register = () => {
       .catch((error) => setError(error.message));
   };
 
+  const handleQuickLogin = () => {
+  const testEmail = "testuser@example.com"; 
+  const testPassword = "Test@123@user"; 
+
+  signInUser(testEmail, testPassword)
+    .then((result) => {
+      setUser(result.user);
+      navigate("/"); 
+    })
+    .catch((error) => setError(error.message));
+};
+
   return (
     <div className="w-full md:min-h-screen h-fit md:px-10 px-4 my-20">
       <div className=" rounded-2xl w-full md:h-screen h-full flex gap-5 overflow-hidden p-6 shadow-2xl border border-zinc-200">
@@ -160,12 +173,22 @@ const Register = () => {
                 >
                   Submit
                 </button>
-                <button
-                  onClick={handleGoogleSignIn}
-                  className="btn btn-primary rounded-full mt-4"
-                >
-                  Sign In with Google
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleGoogleSignIn}
+                    className="btn bg-[#9fcc51] flex items-center gap-1 text-white rounded-full mt-4"
+                  >
+                    <FcGoogle />
+                    Sign In with Google
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleQuickLogin}
+                    className="btn bg-blue-500 text-white rounded-full mt-4"
+                  >
+                    Quick Login (Test User)
+                  </button>
+                </div>
                 {error && <p className="text-red-500 text-xs">{error}</p>}
               </fieldset>
             </form>

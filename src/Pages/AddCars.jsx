@@ -19,7 +19,7 @@ const AddCars = () => {
         name: form.name.value,
         email: form.provider_email.value,
       },
-      status: "available",
+      status: form.status.value || "available",
       rent_price: form.rent_price.value,
       location: form.location.value,
       description: form.description.value,
@@ -27,16 +27,16 @@ const AddCars = () => {
     };
 
     try {
-      const res = await fetch("https://rent-wheel-server-api.onrender.com/add-car", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(carData),
-      });
+      const res = await fetch(
+        "https://rent-wheel-server-api.onrender.com/add-car",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(carData),
+        }
+      );
 
       const data = await res.json();
-      // console.log("server response", data);
 
       if (data.insertedId) {
         Swal.fire({
@@ -66,36 +66,43 @@ const AddCars = () => {
   };
 
   return (
-    <div className="relative w-full min-h-screen flex items-center justify-center bg-zinc-100 px-4 md:px-0 py-20">
+    <div className="relative w-full min-h-screen flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 backdrop-blur-2xl  px-4 md:px-0 py-20 transition-colors duration-300 overflow-hidden">
+      {/* Glowing background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#9fcc51] dark:bg-[#9fcc51]/30 rounded-full blur-[140px]" />
         <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-[#9fcc51] dark:bg-[#9fcc51]/30 rounded-full blur-[160px]" />
         <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-[#9fcc51] dark:bg-[#9fcc51]/30 rounded-full blur-[160px]" />
       </div>
+
+      {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center gap-4 w-5xl px-5 py-10 rounded-3xl shadow-2xl bg-white  border border-zinc-200 z-99"
+        className="flex flex-col items-center gap-4 w-full max-w-5xl px-5 py-10 rounded-3xl shadow-2xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 z-10 transition-colors duration-300"
       >
-        <h1 className="text-5xl font-medium">Add all fields</h1>
-        <div className="flex items-center gap-5 w-full justify-between">
-          <div className="flex flex-col gap-2 w-1/2">
-            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+        <h1 className="text-5xl font-medium text-zinc-900 dark:text-zinc-100">
+          Add all fields
+        </h1>
+
+        {/* Car Name & Category */}
+        <div className="flex flex-col md:flex-row items-center gap-5 w-full justify-between">
+          <div className="flex flex-col gap-2 w-full md:w-1/2">
+            <label className="mt-2 font-semibold text-sm text-zinc-700 dark:text-zinc-200">
               Car Name
             </label>
             <input
               type="text"
-              className="input w-full  rounded-full"
+              className="input w-full rounded-full dark:bg-zinc-700 dark:text-white border border-gray-300 dark:border-zinc-600 px-3 py-2"
               name="car_name"
               placeholder="Car name"
             />
           </div>
-          <div className="flex flex-col gap-2 w-1/2">
-            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+          <div className="flex flex-col gap-2 w-full md:w-1/2">
+            <label className="mt-2 font-semibold text-sm text-zinc-700 dark:text-zinc-200">
               Category
             </label>
             <select
               name="category"
-              className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
+              className="w-full border border-gray-300 dark:border-zinc-600 rounded-full px-3 py-2 text-sm dark:bg-zinc-700 dark:text-white"
               required
             >
               <option disabled value="">
@@ -109,26 +116,27 @@ const AddCars = () => {
             </select>
           </div>
         </div>
-        <div className="flex gap-5 w-full">
-          <div className="w-1/2">
-            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+
+        {/* Photo URL & Status */}
+        <div className="flex flex-col md:flex-row gap-5 w-full mt-3">
+          <div className="w-full md:w-1/2">
+            <label className="mt-2 font-semibold text-sm text-zinc-700 dark:text-zinc-200">
               Photo URL
             </label>
             <input
               type="text"
-              className="input w-full rounded-full"
+              className="input w-full rounded-full dark:bg-zinc-700 dark:text-white border border-gray-300 dark:border-zinc-600 px-3 py-2"
               name="photo_url"
               placeholder="Paste URL"
             />
           </div>
-          <div className="flex flex-col w-1/2">
-            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+          <div className="w-full md:w-1/2">
+            <label className="mt-2 font-semibold text-sm text-zinc-700 dark:text-zinc-200">
               Status
             </label>
             <select
               name="status"
-              className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
-              required
+              className="w-full border border-gray-300 dark:border-zinc-600 rounded-full px-3 py-2 text-sm dark:bg-zinc-700 dark:text-white"
             >
               <option disabled selected value="">
                 Status
@@ -139,58 +147,69 @@ const AddCars = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-5 w-full justify-between">
-          <div className="flex flex-col w-1/2">
-            <label className="mt-2 text-sm">Provider Name</label>
+        {/* Provider Info */}
+        <div className="flex flex-col md:flex-row gap-5 w-full mt-3">
+          <div className="w-full md:w-1/2">
+            <label className="mt-2 text-sm text-zinc-700 dark:text-zinc-200">
+              Provider Name
+            </label>
             <input
               type="text"
-              className="input w-full rounded-full"
+              className="input w-full rounded-full dark:bg-zinc-700 dark:text-white border border-gray-300 dark:border-zinc-600 px-3 py-2"
               name="name"
               placeholder="Name"
             />
           </div>
-          <div className="flex flex-col w-1/2">
-            <label className="mt-2 text-sm">Provider Email</label>
+          <div className="w-full md:w-1/2">
+            <label className="mt-2 text-sm text-zinc-700 dark:text-zinc-200">
+              Provider Email
+            </label>
             <input
               type="email"
-              className="input w-full rounded-full"
+              className="input w-full rounded-full dark:bg-zinc-700 dark:text-white border border-gray-300 dark:border-zinc-600 px-3 py-2"
               name="provider_email"
               placeholder="Provider Email"
             />
           </div>
         </div>
-        <div className="flex items-center gap-5 w-full justify-between">
-          <div className="flex flex-col gap-2 w-1/2">
-            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+
+        {/* Rent & Location */}
+        <div className="flex flex-col md:flex-row gap-5 w-full mt-3">
+          <div className="w-full md:w-1/2">
+            <label className="mt-2 font-semibold text-sm text-zinc-700 dark:text-zinc-200">
               Rent Price
             </label>
             <input
               type="number"
-              className="input w-full rounded-full"
+              className="input w-full rounded-full dark:bg-zinc-700 dark:text-white border border-gray-300 dark:border-zinc-600 px-3 py-2"
               name="rent_price"
               placeholder="Rent Price"
             />
           </div>
-          <div className="flex flex-col gap-2 w-1/2">
-            <label className="mt-2 font-semibold text-zinc-700 text-sm">
+          <div className="w-full md:w-1/2">
+            <label className="mt-2 font-semibold text-sm text-zinc-700 dark:text-zinc-200">
               Location
             </label>
             <input
               type="text"
-              className="input w-full rounded-full"
+              className="input w-full rounded-full dark:bg-zinc-700 dark:text-white border border-gray-300 dark:border-zinc-600 px-3 py-2"
               name="location"
-              placeholder="location"
+              placeholder="Location"
             />
           </div>
         </div>
+
+        {/* Description */}
         <textarea
           name="description"
-          className="border w-full rounded-2xl border-zinc-300 p-3"
+          className="border w-full rounded-2xl border-gray-300 dark:border-zinc-600 dark:bg-zinc-700 dark:text-white p-3 mt-3"
           placeholder="Write description..."
           cols="40"
           rows="5"
         ></textarea>
-        <button className="bg-[#9fcc51] text-white w-full transition-all duration-300  py-2 rounded-3xl mt-3 cursor-pointer">
+
+        {/* Submit Button */}
+        <button className="bg-[#9fcc51] text-white w-full transition-all duration-300 py-2 rounded-3xl mt-3 hover:bg-[#86b03c]">
           Add
         </button>
       </form>

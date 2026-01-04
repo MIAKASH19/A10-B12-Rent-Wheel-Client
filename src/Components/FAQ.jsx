@@ -38,7 +38,7 @@ const FAQ = () => {
     };
 
     return (
-        <div className="relative py-24 px-0 md:px-12 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 overflow-hidden">
+        <div className="relative py-24 px-4 md:px-12 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 overflow-hidden">
 
             <div className="flex flex-col gap-12">
                 <div className="h-20 w-full flex sm:flex-row flex-col gap-3 sm:gap-0 items-center justify-center sm:justify-between  border-b-2 border-b-zinc-200">

@@ -92,7 +92,7 @@ const MyListings = () => {
           Swal.fire({
             icon: "success",
             title: "Updated!",
-            text: "Your Car Info is updated, Successfully",
+            text: "Your Car Info is updated successfully",
             timer: 2000,
             showConfirmButton: false,
           });
@@ -101,23 +101,23 @@ const MyListings = () => {
   };
 
   return (
-    <div className="min-h-screen md:px-10 px-4 mt-20">
-      <h1 className="text-4xl border-b border-zinc-200 pb-4">
+    <div className="min-h-screen md:px-10 px-4 pt-5 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+      <h1 className="text-4xl border-b border-zinc-200 dark:border-zinc-700 pb-4">
         My Car Listings : {carList.length}
       </h1>
 
       {carList.length === 0 && !showSuccess ? (
         <div className="flex flex-col items-center justify-center mt-20">
           <Lottie animationData={emptyAnimation} loop className="w-72" />
-          <p className="text-xl text-zinc-600 mt-4">
+          <p className="text-xl text-zinc-600 dark:text-zinc-300 mt-4">
             You have no car listings yet.
           </p>
         </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="table">
+        <div className="overflow-x-auto mt-6">
+          <table className="table w-full border-separate border-spacing-0 dark:bg-zinc-800 rounded-xl shadow-md">
             <thead>
-              <tr>
+              <tr className="bg-zinc-100 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100">
                 <th className="hidden sm:table-cell">Sl No.</th>
                 <th className="table-cell">Car name</th>
                 <th className="hidden sm:table-cell">Category</th>
@@ -128,26 +128,25 @@ const MyListings = () => {
             </thead>
             <tbody>
               {carList.map((listing, index) => (
-                <tr key={listing._id}>
+                <tr
+                  key={listing._id}
+                  className="border-b border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                >
                   <th className="hidden sm:table-cell">{index + 1}</th>
                   <td className="table-cell">{listing.car_name}</td>
                   <td className="hidden sm:table-cell">{listing.category}</td>
-                  <td className="hidden sm:table-cell capitalize">
-                    {listing.status}
-                  </td>
+                  <td className="hidden sm:table-cell capitalize">{listing.status}</td>
                   <td className="table-cell">{listing.rent_price} tk</td>
-
-                  <td className="flex">
+                  <td className="flex gap-2">
                     <button
                       onClick={() => handleUpdateButton(listing)}
-                      className="text-white text-xs px-4 py-1 rounded-full bg-black mr-3"
+                      className="text-white text-xs px-4 py-1 rounded-full bg-black hover:bg-gray-800 transition-colors"
                     >
                       Update
                     </button>
-
                     <button
                       onClick={() => handleListingDelete(listing._id)}
-                      className="text-white text-xs px-4 py-1 rounded-full bg-red-500"
+                      className="text-white text-xs px-4 py-1 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
                     >
                       Delete
                     </button>
@@ -157,37 +156,33 @@ const MyListings = () => {
             </tbody>
           </table>
 
+          {/* Update Modal */}
           <dialog
             ref={updateModalRef}
-            className="modal modal-bottom h-screen sm:modal-middle"
+            className="modal modal-bottom sm:modal-middle dark:bg-zinc-900 dark:text-zinc-100"
           >
-            <div className="modal-box h-full">
-              <form onSubmit={handleUpdateFormSubmit} className="">
-                <h1 className="text-4xl font-semibold text-center mb-2">
-                  Update desired fields
+            <div className="modal-box h-full dark:bg-zinc-900 dark:text-zinc-100">
+              <form onSubmit={handleUpdateFormSubmit}>
+                <h1 className="text-4xl font-semibold text-center mb-4">
+                  Update Desired Fields
                 </h1>
 
-                <div className="flex items-center gap-5 w-full justify-between">
-                  <div className="flex flex-col gap-2 w-1/2">
-                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                      Car Name
-                    </label>
+                <div className="flex flex-col md:flex-row gap-5 w-full">
+                  <div className="flex flex-col gap-2 w-full md:w-1/2">
+                    <label className="mt-2 font-semibold text-sm">Car Name</label>
                     <input
                       type="text"
-                      className="input w-full rounded-full"
+                      className="input w-full rounded-full dark:bg-zinc-800 dark:text-white"
                       name="car_name"
                       placeholder="Car name"
                       defaultValue={selectedListing?.car_name}
                     />
                   </div>
-
-                  <div className="flex flex-col gap-2 w-1/2">
-                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                      Category
-                    </label>
+                  <div className="flex flex-col gap-2 w-full md:w-1/2">
+                    <label className="mt-2 font-semibold text-sm">Category</label>
                     <select
                       name="category"
-                      className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
+                      className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm dark:bg-zinc-800 dark:text-white"
                       required
                       defaultValue={selectedListing?.category}
                     >
@@ -203,27 +198,23 @@ const MyListings = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-5 w-full mt-2">
-                  <div className="w-1/2">
-                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                      Photo URL
-                    </label>
+                <div className="flex flex-col md:flex-row gap-5 w-full mt-3">
+                  <div className="w-full md:w-1/2">
+                    <label className="mt-2 font-semibold text-sm">Photo URL</label>
                     <input
                       type="text"
-                      className="input w-full rounded-full"
+                      className="input w-full rounded-full dark:bg-zinc-800 dark:text-white"
                       name="photo_url"
                       placeholder="Paste URL"
                       defaultValue={selectedListing?.image}
                     />
                   </div>
 
-                  <div className="flex flex-col w-1/2">
-                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                      Status
-                    </label>
+                  <div className="w-full md:w-1/2">
+                    <label className="mt-2 font-semibold text-sm">Status</label>
                     <select
                       name="status"
-                      className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm"
+                      className="w-full border border-gray-300 rounded-full px-2 py-2 text-sm dark:bg-zinc-800 dark:text-white"
                       required
                       defaultValue={selectedListing?.status}
                     >
@@ -236,55 +227,22 @@ const MyListings = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-5 w-full justify-between">
-                  <div className="flex flex-col w-1/2">
-                    <label className="mt-2 text-sm">Provider Name</label>
-                    <input
-                      type="text"
-                      className="input w-full rounded-full"
-                      name="provider_name"
-                      placeholder="Name"
-                      disabled
-                      defaultValue={selectedListing?.provider_name}
-                    />
-                  </div>
-
-                  <div className="flex flex-col w-1/2">
-                    <label className="mt-2 text-sm">Provider Email</label>
-                    <input
-                      type="email"
-                      className="input w-full rounded-full"
-                      name="provider_email"
-                      placeholder="Provider Email"
-                      disabled
-                      defaultValue={selectedListing?.provider_email}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 w-full justify-between">
-                  <div className="flex flex-col gap-2 w-1/2">
-                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                      Rent Price
-                    </label>
+                <div className="flex flex-col md:flex-row gap-5 w-full mt-3">
+                  <div className="w-full md:w-1/2">
+                    <label className="mt-2 text-sm">Rent Price</label>
                     <input
                       type="number"
-                      className="input w-full rounded-full"
+                      className="input w-full rounded-full dark:bg-zinc-800 dark:text-white"
                       name="rent_price"
-                      placeholder="Rent Price"
                       defaultValue={selectedListing?.rent_price}
                     />
                   </div>
-
-                  <div className="flex flex-col gap-2 w-1/2">
-                    <label className="mt-2 font-semibold text-zinc-700 text-sm">
-                      Location
-                    </label>
+                  <div className="w-full md:w-1/2">
+                    <label className="mt-2 text-sm">Location</label>
                     <input
                       type="text"
-                      className="input w-full rounded-full"
+                      className="input w-full rounded-full dark:bg-zinc-800 dark:text-white"
                       name="location"
-                      placeholder="location"
                       defaultValue={selectedListing?.location}
                     />
                   </div>
@@ -292,25 +250,23 @@ const MyListings = () => {
 
                 <textarea
                   name="description"
-                  className="border w-full rounded-2xl border-zinc-300 p-3 mt-5"
+                  className="border w-full rounded-2xl border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white p-3 mt-5"
                   placeholder="Write description..."
-                  cols="40"
                   rows="3"
                   defaultValue={selectedListing?.description}
                 ></textarea>
 
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col md:flex-row gap-3 mt-5">
                   <button
                     type="submit"
-                    className="bg-black text-white w-full transition-all duration-300 py-2 rounded-3xl mt-3 cursor-pointer"
+                    className="bg-black text-white w-full md:w-1/2 py-2 rounded-3xl hover:bg-gray-800 transition-colors"
                   >
                     Update
                   </button>
-
                   <button
                     type="button"
                     onClick={handleCancelModalButton}
-                    className="bg-zinc-100 text-white w-full transition-all duration-300 py-2 rounded-3xl mt-3 cursor-pointer"
+                    className="bg-zinc-200 dark:bg-zinc-700 dark:text-white w-full md:w-1/2 py-2 rounded-3xl hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors"
                   >
                     Cancel
                   </button>
@@ -320,13 +276,10 @@ const MyListings = () => {
           </dialog>
         </div>
       )}
+
       {showSuccess && (
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <Lottie
-            animationData={successAnimation}
-            loop={false}
-            className="w-52"
-          />
+        <div className="fixed inset-0 bg-black/30 dark:bg-black/50 flex items-center justify-center z-50">
+          <Lottie animationData={successAnimation} loop={false} className="w-52" />
         </div>
       )}
     </div>

@@ -36,13 +36,16 @@ const Footer = () => {
           <Link to="/contact-us" className="text-2xl font-medium">
             Contact us
           </Link>
+          <Link to="/privacy" className="text-2xl font-medium">
+            Privacy Policy
+          </Link>
           {user && (
-            <Link to="/my-listings" className="text-2xl font-medium">
-              My Listings
+            <Link to="/dashboard/my-bookings" className="text-2xl font-medium">
+              Dashboard
             </Link>
           )}
         </div>
-        <div className="flex flex-col sm:items-end items-start gap-1">
+        <div className="flex hidden md:block flex-col sm:items-end items-start gap-1">
           <h1 className="opacity-70 text-xl mb-3">Office</h1>
           <p className="text-3xl w-80 md:text-end text-start">
             k/7 road, Rubir Mor, Noagaon, Bangladesh (+943-587-924)
@@ -82,7 +85,7 @@ const Footer = () => {
       </div>
       <div className="sm:h-[12vh] h-[8vh] w-full text-black text-sm font-medium flex items-center sm:justify-between justify-center bg-[#9fcc51] px-10 mt-5">
         <p className="uppercase cursor-pointer sm:text-start text-center text-xs">
-          Copyright © rent-wheels 2025
+          Copyright © rent-wheels 2026
         </p>
         <div className="hidden sm:flex gap-5">
           <Link

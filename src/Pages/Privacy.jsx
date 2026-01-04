@@ -27,8 +27,8 @@ export default function PrivacyPolicy() {
           transition={{ duration: 1.1, ease: "easeOut" }}
           className="text-[9vw] leading-none font-medium tracking-tight"
         >
-          Privacy,
-          <span className="block text-[#9fcc51]">by design.</span>
+          Your Data
+          <span className="text-[#9fcc51]"> Our Safety.</span>
         </motion.h1>
 
         <motion.p
@@ -38,12 +38,12 @@ export default function PrivacyPolicy() {
           className="mt-10 max-w-2xl text-lg text-neutral-700 dark:text-neutral-400"
         >
           At Rent-Wheels, your personal information is handled with clarity,
-          responsibility, and respect — never as a commodity.
+          responsibility, and respect never as a commodity.
         </motion.p>
       </section>
 
       {/* INTRO */}
-      <section className="relative px-6 md:px-10 py-32 max-w-6xl mx-auto">
+      <section className="relative px-6 md:px-10 py-32">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}

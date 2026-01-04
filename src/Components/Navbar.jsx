@@ -139,7 +139,6 @@ const Navbar = () => {
           >
             <Link className="py-3 mx-5 border-b border-zinc-200" to='/'>Home</Link>
             <Link className="py-3 mx-5 border-b border-zinc-200" to='/browse-cars'>Browse Car</Link>
-            <Link className="py-3 mx-5 border-b border-zinc-200" to='/add-car'>Add Car</Link>
             <Link className="py-3 mx-5 border-b border-zinc-200" to='/services'>Services</Link>
             <Link className="py-3 mx-5 border-b border-zinc-200" to='/about-us'>About us</Link>
             <Link className="py-3 mx-5 border-b border-zinc-200" to='/contact-us'>Contact us</Link>
@@ -177,7 +176,7 @@ const Navbar = () => {
               <p className="border-b border-zinc-200 pb-2 text-xs">
                 {user.email}
               </p>
-              <Link to="/dashboard" className="flex items-center py-2 gap-2 hover:text-[#9fcc51] rounded-2xl mt-2">
+              <Link to="/dashboard/my-bookings" className="flex items-center py-2 gap-2 hover:text-[#9fcc51] rounded-2xl mt-2">
                 <LuLayoutDashboard />
                 Dashboard</Link>
               <button

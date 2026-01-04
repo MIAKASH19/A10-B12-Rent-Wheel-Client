@@ -4,6 +4,7 @@ import CarCard from "./CarCard";
 import Lottie from "lottie-react";
 import { AuthContext } from "../Context/AuthContext";
 import emptyAnimation from "../../public/Empty State.json";
+import { Link } from "react-router";
 
 const Featured = () => {
   const [cards, setCards] = useState([]);
@@ -33,13 +34,13 @@ const Featured = () => {
   };
 
   return (
-    <div className="w-full min-h-screen px-10 py-20">
+    <div className="w-full min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white px-10 py-20">
       <div className="sm:h-20 h-50 w-full relative flex sm:flex-row flex-col gap-4 items-center justify-between  border-b-2 border-b-zinc-200 pb-5 sm:pb-0">
         <h3 className="text-4xl font-momo opacity-60">02</h3>
         <h2 className="text-4xl text-center mx-auto absolute left-1/2 top-1/3 sm:top-0 w-full -translate-x-1/2">
           Featured Cars
         </h2>
-        <label className="input rounded-full w-70">
+        <label className="input rounded-full dark:bg-zinc-800 dark:text-zinc-300 w-70">
           <svg
             className="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"
@@ -78,6 +79,14 @@ const Featured = () => {
           {cards.map((car) => <CarCard key={car._id} car={car} />)}
         </div>
       )}
+      <div className="flex items-center justify-center">
+        <Link
+          to="/browse-cars"
+          className="bg-[#9fcc51] px-10 py-3 rounded-full text-sm sm:text-md font-bold sm:font-normal text-white transition-all duration-300 hover:bg-black z-1"
+        >
+          Browse All Cars
+        </Link>
+      </div>
     </div>
   );
 };

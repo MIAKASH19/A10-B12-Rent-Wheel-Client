@@ -7,7 +7,7 @@ const CarCard = ({ car }) => {
   return (
     <motion.div
       key={car._id}
-      className="border border-zinc-200 w-78 h-fit rounded-4xl shadow-sm p-3"
+      className="border border-zinc-200 dark:border-zinc-600 dark:bg-zinc-800 w-78 h-fit rounded-4xl shadow-sm p-3"
       initial={{ opacity: 0, y: 200 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.05, boxShadow: "0px 15px 25px rgba(0,0,0,0.2)" }}
@@ -25,12 +25,12 @@ const CarCard = ({ car }) => {
       </div>
       <div className="mt-3 px-2">
         <div className="flex items-center justify-between">
-          <h1 className="text-lg uppercase text-zinc-700 font-momo font-semibold">
+          <h1 className="text-lg uppercase text-zinc-700 dark:text-zinc-300 font-momo font-semibold">
             {car.car_name}
           </h1>
-          <p className="text-sm opacity-55">{car.car_type}</p>
+          <p className="text-sm  opacity-55">{car.car_type}</p>
         </div>
-        <p className="text-sm text-zinc-700 mb-2">{car?.provider?.name}</p>
+        <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-2">{car?.provider?.name}</p>
         <div className="flex items-center justify-between">
           <p className="text-lg font-semibold">{car.rent_price} tk</p>
           <Link
